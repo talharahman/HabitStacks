@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HabitStacks</string>
+    <string name="habit_select_text">Select habit to work on</string>
+    <string name="track_button">TRACK</string>
+</resources>

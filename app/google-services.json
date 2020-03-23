@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "178039485487",
+    "firebase_url": "https://habitstacks.firebaseio.com",
+    "project_id": "habitstacks",
+    "storage_bucket": "habitstacks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178039485487:android:d710b120d821a033c9c2da",
+        "android_client_info": {
+          "package_name": "com.example.habitstacks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178039485487-vv1rhabonkks32vcd7k92pf8f3ant1lc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMU3wtEIU6TAI0D5LT9o8eglACLlI16M0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178039485487-vv1rhabonkks32vcd7k92pf8f3ant1lc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
