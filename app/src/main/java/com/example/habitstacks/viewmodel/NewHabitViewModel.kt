@@ -1,26 +1,28 @@
 package com.example.habitstacks.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.habitstacks.database.HabitDao
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import com.example.habitstacks.model.Habit
+import kotlinx.coroutines.*
 
-class HabitDashboardViewModel(dataSource: HabitDao) : ViewModel() {
+class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
 
     private val dataBase = dataSource
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _showSelectedHabit = MutableLiveData<Long>()
-    val showSelectedHabit get() = _showSelectedHabit
+    fun newHabitSubmit(description: String) {
+        uiScope.launch {
+            val newHabit = Habit(description)
+            insert(newHabit)
+        }
+    }
 
-    val habits = dataBase.getAllHabits()
+    private suspend fun insert(habit: Habit) {
+        withContext(Dispatchers.IO) { dataBase.insert(habit) }
+    }
 
     override fun onCleared() {
         super.onCleared()
@@ -30,12 +32,12 @@ class HabitDashboardViewModel(dataSource: HabitDao) : ViewModel() {
 
 
 @Suppress("UNCHECKED_CAST")
-class DashBoardViewModelFactory(
+class NewHabitViewModelFactory(
         private val dataSource: HabitDao) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(HabitDashboardViewModel::class.java)) {
-            return HabitDashboardViewModel(dataSource) as T
+        if (modelClass.isAssignableFrom(NewHabitViewModel::class.java)) {
+            return NewHabitViewModel(dataSource) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

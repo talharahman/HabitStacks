@@ -12,14 +12,14 @@
         tools:layout="@layout/habit_dashboard">
         <action
             android:id="@+id/action_dashBoard_to_addNewHabit"
-            app:destination="@id/addNewHabit"
+            app:destination="@id/newHabit"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_in_left" />
     </fragment>
 
     <fragment
-        android:id="@+id/addNewHabit"
-        android:name="com.example.habitstacks.view.AddNewHabit"
-        android:label="add_new_habit"
-        tools:layout="@layout/add_new_habit" />
+        android:id="@+id/newHabit"
+        android:name="com.example.habitstacks.view.NewHabit"
+        android:label="new_habit"
+        tools:layout="@layout/new_habit" />
 </navigation>
