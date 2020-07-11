@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="habitDashboardViewModel"
+            type="com.example.habitstacks.viewmodel.HabitDashboardViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -30,10 +36,10 @@
             app:layout_constraintTop_toBottomOf="@+id/selectHabitText" />
 
         <Button
-            android:id="@+id/track_habit_button"
+            android:id="@+id/new_habit_button"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginBottom="52dp"
+            android:layout_marginBottom="60dp"
             android:background="@color/colorAccent"
             android:fontFamily="sans-serif-smallcaps"
             android:text="@string/new_habit"

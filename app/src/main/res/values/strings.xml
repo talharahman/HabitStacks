@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">HabitStacks</string>
 
-    <string name="habit_select_text">Select habit to work on</string>
-    <string name="habit_add_description">Write the habit or routine you would like to change</string>
+    <string name="habit_select_text">select habit to work on</string>
+    <string name="habit_add_description">write the habit or routine you would like to change</string>
 
 
     <string name="track_button">TRACK</string>

@@ -8,10 +8,13 @@
     <fragment
         android:id="@+id/dashBoard"
         android:name="com.example.habitstacks.view.HabitDashboard"
-        android:label="DashBoard">
+        android:label="habit_dashboard"
+        tools:layout="@layout/habit_dashboard">
         <action
             android:id="@+id/action_dashBoard_to_addNewHabit"
-            app:destination="@id/addNewHabit" />
+            app:destination="@id/addNewHabit"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_in_left" />
     </fragment>
 
     <fragment
