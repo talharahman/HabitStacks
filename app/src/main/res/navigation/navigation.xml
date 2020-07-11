@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/dashBoard"
-        android:name="com.example.habitstacks.view.DashBoard"
-        android:label="DashBoard"
-        tools:layout="@layout/dashboard">
+        android:name="com.example.habitstacks.view.HabitDashboard"
+        android:label="DashBoard">
         <action
             android:id="@+id/action_dashBoard_to_addNewHabit"
             app:destination="@id/addNewHabit" />
     </fragment>
+
     <fragment
         android:id="@+id/addNewHabit"
         android:name="com.example.habitstacks.view.AddNewHabit"
