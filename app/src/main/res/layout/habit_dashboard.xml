@@ -8,7 +8,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/selectHabitText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
@@ -19,15 +19,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.viewpager.widget.ViewPager
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/viewPager"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="70dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/selectHabitText" />
 
         <Button
             android:id="@+id/track_habit_button"
