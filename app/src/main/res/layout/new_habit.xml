@@ -18,12 +18,13 @@
                 android:id="@+id/track_habit_button"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginBottom="60dp"
+                android:layout_marginBottom="24dp"
                 android:background="@color/colorAccent"
                 android:fontFamily="sans-serif-smallcaps"
                 android:text="@string/submit_button"
                 android:textColor="#fff"
-                android:textSize="60sp"
+                android:textSize="40sp"
+                android:onClick="@{() -> newHabitViewModel.newHabitSubmit()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0" />
@@ -45,7 +46,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.321" />
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/edit_habit_description"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"

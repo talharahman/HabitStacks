@@ -1,6 +1,5 @@
 package com.example.habitstacks.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,7 +17,7 @@ class HabitDashboardViewModel(dataSource: HabitDao) : ViewModel() {
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val _showSelectedHabit = MutableLiveData<Long>()
-    val showSelectedHabit get() = _showSelectedHabit
+    val showSelectedHabit: LiveData<Long> get() = _showSelectedHabit
 
     val habits = dataBase.getAllHabits()
 
@@ -27,7 +26,6 @@ class HabitDashboardViewModel(dataSource: HabitDao) : ViewModel() {
         viewModelJob.cancel()
     }
 }
-
 
 @Suppress("UNCHECKED_CAST")
 class DashBoardViewModelFactory(

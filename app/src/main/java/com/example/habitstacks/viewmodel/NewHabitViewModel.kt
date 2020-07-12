@@ -1,5 +1,8 @@
 package com.example.habitstacks.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.habitstacks.database.HabitDao
@@ -13,9 +16,17 @@ class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    fun newHabitSubmit(description: String) {
+    private val _inputDescription = MutableLiveData<String>()
+    val inputDescription: LiveData<String> get() = _inputDescription
+
+    fun onTextChanged(input: String) {
+        _inputDescription.value = input
+    }
+
+    fun newHabitSubmit() {
+        Log.d("NEWHABITVM", inputDescription.value!!.toString())
         uiScope.launch {
-            val newHabit = Habit(description)
+            val newHabit = Habit(inputDescription.value!!.toString())
             insert(newHabit)
         }
     }
