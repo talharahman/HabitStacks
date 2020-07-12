@@ -11,7 +11,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_priority"
-        style="@style/AddCardViewStyle"
+        style="@style/CardViewStyle"
         android:enabled="@{newHabitViewModel.cardViewPriorityVisible}"
         app:layout_constraintBottom_toTopOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +21,7 @@
 
         <TextView
             android:id="@+id/habit_add_priority"
-            style="@style/AddHabitTextStyle"
+            style="@style/TextStyle"
             android:text="@string/habit_add_priority"
             android:layout_marginTop="30dp"/>
 

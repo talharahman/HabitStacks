@@ -11,16 +11,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
 
         <TextView
             android:id="@+id/selectHabitText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TextStyle"
             android:layout_marginTop="44dp"
-            android:fontFamily="sans-serif-smallcaps"
             android:text="@string/habit_select_text"
-            android:textSize="32sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,6 +36,7 @@
         <Button
             android:id="@+id/new_habit_button"
             style="@style/ButtonStyle"
+            android:background="@color/colorPrimary"
             android:layout_marginBottom="24dp"
             android:text="@string/new_habit"
             app:layout_constraintBottom_toBottomOf="parent"

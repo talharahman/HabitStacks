@@ -10,7 +10,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_habitDescription"
-        style="@style/AddCardViewStyle"
+        style="@style/CardViewStyle"
         android:enabled="@{newHabitViewModel.cardViewDescriptionVisible}"
         app:layout_constraintBottom_toTopOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"

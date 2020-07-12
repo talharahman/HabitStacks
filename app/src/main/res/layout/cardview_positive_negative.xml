@@ -12,7 +12,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_positiveOr_negative"
-        style="@style/AddCardViewStyle"
+        style="@style/CardViewStyle"
         android:enabled="@{newHabitViewModel.cardViewPosNegVisible}"
         app:layout_constraintBottom_toTopOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,14 +22,14 @@
 
         <TextView
             android:id="@+id/habit_add_question"
-            style="@style/AddHabitTextStyle"
-            android:layout_marginTop="50dp"
+            style="@style/TextStyle"
+            android:layout_marginTop="30dp"
             android:text="@string/habit_add_question" />
 
         <RadioGroup
             android:id="@+id/question_radio_group"
             style="@style/RadioButtonStyle"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="160dp"
             android:layout_marginEnd="24dp"
             android:orientation="vertical">
@@ -38,6 +38,11 @@
                 android:id="@+id/positive_button"
                 style="@style/RadioButtonStyle"
                 android:text="@string/positive_button_text" />
+
+            <RadioButton
+                android:id="@+id/neutral_button"
+                style="@style/RadioButtonStyle"
+                android:text="@string/neutral_button_text"/>
 
             <RadioButton
                 android:id="@+id/negative_button"

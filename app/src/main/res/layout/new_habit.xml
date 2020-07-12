@@ -20,13 +20,13 @@
             android:text="@string/back_text"
             android:enabled="@{newHabitViewModel.backButtonVisible}"
             android:onClick="@{() -> newHabitViewModel.navigateToPreviousView()}"
-            app:layout_constraintBottom_toBottomOf="@id/submit_button"
+            app:layout_constraintBottom_toBottomOf="@id/focus_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/submit_button"
+            android:id="@+id/focus_button"
             style="@style/ButtonStyle"
             android:layout_marginBottom="24dp"
             android:onClick="@{() -> newHabitViewModel.navigateToNextView()}"

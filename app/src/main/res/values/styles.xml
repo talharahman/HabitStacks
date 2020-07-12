@@ -8,21 +8,21 @@
 
     <style name="ButtonStyle">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_height">70dp</item>
         <item name="android:fontFamily">"sans-serif-smallcaps"</item>
         <item name="android:textSize">40sp</item>
         <item name="android:textColor">#FFF</item>
         <item name="android:background">@color/colorAccent</item>
     </style>
     
-    <style name="AddCardViewStyle">
+    <style name="CardViewStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">360dp</item>
         <item name="android:layout_margin">16dp</item>
         <item name="android:padding">16dp</item>
     </style>
     
-    <style name="AddHabitTextStyle">
+    <style name="TextStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">8dp</item>
@@ -40,5 +40,10 @@
         <item name="android:layout_marginBottom">8dp</item>
         <item name="fontFamily">sans-serif</item>
         <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="IconStyle">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">60dp</item>
     </style>
 </resources>
