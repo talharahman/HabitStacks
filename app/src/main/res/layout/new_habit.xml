@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="newHabitViewModel"
+            type="com.example.habitstacks.viewmodel.NewHabitViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -30,20 +36,18 @@
             app:layout_constraintHorizontal_bias="0.0" />
 
         <include
-            android:id="@+id/itemview_add_description"
+            android:id="@+id/layout_add_description"
             layout="@layout/cardview_add_description"/>
 
         <include
-            android:id="@+id/itemview_positive_negative"
+            android:id="@+id/layout_positive_negative"
             layout="@layout/cardview_positive_negative"/>
+
+        <include
+            android:id="@+id/layout_priority"
+            layout="@layout/cardview_priority"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <data>
-        <variable
-            name="newHabitViewModel"
-            type="com.example.habitstacks.viewmodel.NewHabitViewModel" />
-    </data>
 
 </layout>

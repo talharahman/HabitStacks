@@ -43,19 +43,26 @@ class NewHabit : Fragment() {
         viewModel.cardViewDescriptionVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
-                    binding.itemviewAddDescription.cardViewHabitDescription.visibility = View.VISIBLE
-                    binding.itemviewAddDescription.editHabitDescription.addTextChangedListener { input: Editable? ->
+                    binding.layoutAddDescription.cardViewHabitDescription.visibility = View.VISIBLE
+                    binding.layoutAddDescription.editHabitDescription.addTextChangedListener { input: Editable? ->
                         input?.let { viewModel.onTextChanged(input.toString()) }
                     }
                 }
-                else binding.itemviewAddDescription.cardViewHabitDescription.visibility = View.GONE
+                else binding.layoutAddDescription.cardViewHabitDescription.visibility = View.GONE
             }
         })
 
         viewModel.cardViewPosNegVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
-                if (it) binding.itemviewPositiveNegative.cardViewPositiveOrNegative.visibility = View.VISIBLE
-                else binding.itemviewPositiveNegative.cardViewPositiveOrNegative.visibility = View.GONE
+                if (it) binding.layoutPositiveNegative.cardViewPositiveOrNegative.visibility = View.VISIBLE
+                else binding.layoutPositiveNegative.cardViewPositiveOrNegative.visibility = View.GONE
+            }
+        })
+
+        viewModel.cardViewPriorityVisible.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) binding.layoutPriority.cardviewPriority.visibility = View.VISIBLE
+                else binding.layoutPriority.cardviewPriority.visibility = View.GONE
             }
         })
 

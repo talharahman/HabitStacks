@@ -12,7 +12,6 @@ import kotlinx.coroutines.Job
 class HabitDashboardViewModel(dataSource: HabitDao) : ViewModel() {
 
     private val dataBase = dataSource
-
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 

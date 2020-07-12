@@ -9,11 +9,10 @@
             type="com.example.habitstacks.viewmodel.NewHabitViewModel" />
     </data>
 
-
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView_positiveOr_negative"
+        android:id="@+id/cardview_priority"
         style="@style/AddCardViewStyle"
-        android:enabled="@{newHabitViewModel.cardViewPosNegVisible}"
+        android:enabled="@{newHabitViewModel.cardViewPriorityVisible}"
         app:layout_constraintBottom_toTopOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,31 +20,37 @@
         app:layout_constraintVertical_bias="0.142">
 
         <TextView
-            android:id="@+id/habit_add_question"
+            android:id="@+id/habit_add_priority"
             style="@style/AddHabitTextStyle"
-            android:layout_marginTop="50dp"
-            android:text="@string/habit_add_question" />
+            android:text="@string/habit_add_priority"
+            android:layout_marginTop="30dp"/>
 
         <RadioGroup
-            android:id="@+id/question_radio_group"
+            android:id="@+id/priority_radio_group"
             style="@style/RadioButtonStyle"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginEnd="68dp"
             android:layout_marginTop="160dp"
-            android:layout_marginEnd="24dp"
             android:orientation="vertical">
 
             <RadioButton
-                android:id="@+id/positive_button"
+                android:id="@+id/low_priority_button"
                 style="@style/RadioButtonStyle"
-                android:text="@string/positive_button_text" />
+                android:text="@string/low_priority"/>
 
             <RadioButton
-                android:id="@+id/negative_button"
+                android:id="@+id/med_priority_button"
                 style="@style/RadioButtonStyle"
-                android:text="@string/negative_button_text" />
+                android:text="@string/med_priority"/>
+
+            <RadioButton
+                android:id="@+id/high_priority_button"
+                style="@style/RadioButtonStyle"
+                android:text="@string/high_priority"/>
 
         </RadioGroup>
 
     </androidx.cardview.widget.CardView>
+
 
 </layout>

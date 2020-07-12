@@ -53,9 +53,12 @@ class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
             }
             NewHabitCards.QUESTION -> {
                 _cardViewPosNegVisible.value = false
+                _cardViewPriorityVisible.value = true
                 habitCardPosition = NewHabitCards.PRIORITY
             }
-            NewHabitCards.PRIORITY -> { newHabitSubmit() }
+            NewHabitCards.PRIORITY -> {
+                // newHabitSubmit()
+            }
         }
     }
 
@@ -70,6 +73,7 @@ class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
                 habitCardPosition = NewHabitCards.DESCRIPTION
             }
             NewHabitCards.PRIORITY -> {
+                _cardViewPriorityVisible.value = false
                 _cardViewPosNegVisible.value = true
                 habitCardPosition = NewHabitCards.QUESTION
             }
