@@ -3,11 +3,13 @@
 
     <string name="habit_select_text">select habit to work on</string>
     <string name="habit_add_description">write the habit or routine you would like to change</string>
-
+    <string name="habit_add_question">is this a positive or negative habit ?</string>
 
     <string name="track_button">TRACK</string>
     <string name="back_text">BACK</string>
     <string name="next_text">NEXT</string>
     <string name="submit_text">SUBMIT</string>
     <string name="new_habit">NEW</string>
+    <string name="positive_button_text">I want more of this habit</string>
+    <string name="negative_button_text">I want less of this habit</string>
 </resources>

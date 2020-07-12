@@ -13,6 +13,7 @@
             android:layout_marginBottom="92dp"
             android:text="@string/back_text"
             android:enabled="@{newHabitViewModel.backButtonVisible}"
+            android:onClick="@{() -> newHabitViewModel.navigateToPreviousView()}"
             app:layout_constraintBottom_toBottomOf="@id/submit_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -22,7 +23,7 @@
             android:id="@+id/submit_button"
             style="@style/ButtonStyle"
             android:layout_marginBottom="24dp"
-            android:onClick="@{() -> newHabitViewModel.navigateToNextCardView()}"
+            android:onClick="@{() -> newHabitViewModel.navigateToNextView()}"
             android:text="@string/submit_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,12 +31,11 @@
 
         <include
             android:id="@+id/itemview_add_description"
-            layout="@layout/itemview_add_description"/>
+            layout="@layout/cardview_add_description"/>
 
         <include
             android:id="@+id/itemview_positive_negative"
-            layout="@layout/itemview_positive_negative"/>
-
+            layout="@layout/cardview_positive_negative"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

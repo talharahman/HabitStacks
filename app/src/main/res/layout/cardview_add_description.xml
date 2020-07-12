@@ -12,7 +12,7 @@
         android:id="@+id/cardView_habitDescription"
         style="@style/AddCardViewStyle"
         android:enabled="@{newHabitViewModel.cardViewDescriptionVisible}"
-        app:layout_constraintBottom_toTopOf="@+id/submit_button"
+        app:layout_constraintBottom_toTopOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

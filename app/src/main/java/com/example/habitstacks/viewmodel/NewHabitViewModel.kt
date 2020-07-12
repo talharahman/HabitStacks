@@ -12,6 +12,7 @@ import kotlinx.coroutines.*
 class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
 
     private val dataBase = dataSource
+    private var habitCardPosition: NewHabitCards
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
@@ -27,22 +28,55 @@ class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
     private val _cardViewPosNegVisible = MutableLiveData<Boolean>()
     val cardViewPosNegVisible: LiveData<Boolean> get() = _cardViewPosNegVisible
 
+    private val _cardViewPriorityVisible = MutableLiveData<Boolean>()
+    val cardViewPriorityVisible: LiveData<Boolean> get() = _cardViewPriorityVisible
+
     init {
         _backButtonVisible.value = false
         _cardViewDescriptionVisible.value = true
         _cardViewPosNegVisible.value = false
+        _cardViewPriorityVisible.value = false
+        habitCardPosition = NewHabitCards.DESCRIPTION
     }
 
     fun onTextChanged(input: String) {
         _inputDescription.value = input
     }
 
-    fun navigateToNextCardView() {
-        _cardViewDescriptionVisible.value = false
-        _cardViewPosNegVisible.value = true
+    fun navigateToNextView() {
+        when (habitCardPosition) {
+            NewHabitCards.DESCRIPTION -> {
+                _cardViewDescriptionVisible.value = false
+                _cardViewPosNegVisible.value = true
+                _backButtonVisible.value = true
+                habitCardPosition = NewHabitCards.QUESTION
+            }
+            NewHabitCards.QUESTION -> {
+                _cardViewPosNegVisible.value = false
+                habitCardPosition = NewHabitCards.PRIORITY
+            }
+            NewHabitCards.PRIORITY -> { newHabitSubmit() }
+        }
     }
 
-    fun newHabitSubmit() {
+    fun navigateToPreviousView() {
+        when (habitCardPosition) {
+            NewHabitCards.DESCRIPTION -> {
+                _backButtonVisible.value = false
+            }
+            NewHabitCards.QUESTION -> {
+                _cardViewPosNegVisible.value = false
+                _cardViewDescriptionVisible.value = true
+                habitCardPosition = NewHabitCards.DESCRIPTION
+            }
+            NewHabitCards.PRIORITY -> {
+                _cardViewPosNegVisible.value = true
+                habitCardPosition = NewHabitCards.QUESTION
+            }
+        }
+    }
+
+    private fun newHabitSubmit() {
         uiScope.launch {
         //    val newHabit = Habit(inputDescription.value!!.toString())
         //    insert(newHabit)
@@ -71,3 +105,5 @@ class NewHabitViewModelFactory(
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
+enum class NewHabitCards { DESCRIPTION, QUESTION, PRIORITY }

@@ -21,4 +21,25 @@
         <item name="android:layout_margin">16dp</item>
         <item name="android:padding">16dp</item>
     </style>
+    
+    <style name="AddHabitTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="RadioButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">start</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:layout_marginEnd">24dp</item>
+    </style>
 </resources>

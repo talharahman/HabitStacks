@@ -1,6 +1,7 @@
 package com.example.habitstacks.view
 
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -41,14 +42,15 @@ class NewHabit : Fragment() {
 
         viewModel.cardViewDescriptionVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
-                if (it) binding.itemviewAddDescription.cardViewHabitDescription.visibility = View.VISIBLE
+                if (it) {
+                    binding.itemviewAddDescription.cardViewHabitDescription.visibility = View.VISIBLE
+                    binding.itemviewAddDescription.editHabitDescription.addTextChangedListener { input: Editable? ->
+                        input?.let { viewModel.onTextChanged(input.toString()) }
+                    }
+                }
                 else binding.itemviewAddDescription.cardViewHabitDescription.visibility = View.GONE
             }
         })
-
-        binding.itemviewAddDescription.editHabitDescription.addTextChangedListener {
-            it?.let { viewModel.onTextChanged(it.toString()) }
-        }
 
         viewModel.cardViewPosNegVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
