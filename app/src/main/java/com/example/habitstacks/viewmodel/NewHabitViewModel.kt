@@ -12,19 +12,40 @@ import kotlinx.coroutines.*
 class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
 
     private val dataBase = dataSource
-
-    private var viewModelJob = Job()
+    private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val _inputDescription = MutableLiveData<String>()
     val inputDescription: LiveData<String> get() = _inputDescription
 
-    fun onTextChanged(input: String) { _inputDescription.value = input }
+    private val _backButtonVisible = MutableLiveData<Boolean>()
+    val backButtonVisible: LiveData<Boolean> get() = _backButtonVisible
+
+    private val _cardViewDescriptionVisible = MutableLiveData<Boolean>()
+    val cardViewDescriptionVisible: LiveData<Boolean> get() = _cardViewDescriptionVisible
+
+    private val _cardViewPosNegVisible = MutableLiveData<Boolean>()
+    val cardViewPosNegVisible: LiveData<Boolean> get() = _cardViewPosNegVisible
+
+    init {
+        _backButtonVisible.value = false
+        _cardViewDescriptionVisible.value = true
+        _cardViewPosNegVisible.value = false
+    }
+
+    fun onTextChanged(input: String) {
+        _inputDescription.value = input
+    }
+
+    fun navigateToNextCardView() {
+        _cardViewDescriptionVisible.value = false
+        _cardViewPosNegVisible.value = true
+    }
 
     fun newHabitSubmit() {
         uiScope.launch {
-            val newHabit = Habit(inputDescription.value!!.toString())
-            insert(newHabit)
+        //    val newHabit = Habit(inputDescription.value!!.toString())
+        //    insert(newHabit)
         }
     }
 

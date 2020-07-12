@@ -29,11 +29,33 @@ class NewHabit : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)
                 .get(NewHabitViewModel::class.java)
 
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.newHabitViewModel = viewModel
 
-        binding.editHabitDescription.addTextChangedListener {
+        viewModel.backButtonVisible.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) binding.backButton.visibility = View.VISIBLE
+                else binding.backButton.visibility = View.GONE
+            }
+        })
+
+        viewModel.cardViewDescriptionVisible.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) binding.itemviewAddDescription.cardViewHabitDescription.visibility = View.VISIBLE
+                else binding.itemviewAddDescription.cardViewHabitDescription.visibility = View.GONE
+            }
+        })
+
+        binding.itemviewAddDescription.editHabitDescription.addTextChangedListener {
             it?.let { viewModel.onTextChanged(it.toString()) }
         }
+
+        viewModel.cardViewPosNegVisible.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) binding.itemviewPositiveNegative.cardViewPositiveOrNegative.visibility = View.VISIBLE
+                else binding.itemviewPositiveNegative.cardViewPositiveOrNegative.visibility = View.GONE
+            }
+        })
 
         return binding.root
     }
