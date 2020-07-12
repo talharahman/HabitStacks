@@ -37,14 +37,9 @@
 
         <Button
             android:id="@+id/new_habit_button"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
+            style="@style/ButtonStyle"
             android:layout_marginBottom="24dp"
-            android:background="@color/colorAccent"
-            android:fontFamily="sans-serif-smallcaps"
             android:text="@string/new_habit"
-            android:textColor="#fff"
-            android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

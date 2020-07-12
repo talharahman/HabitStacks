@@ -19,12 +19,9 @@ class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
     private val _inputDescription = MutableLiveData<String>()
     val inputDescription: LiveData<String> get() = _inputDescription
 
-    fun onTextChanged(input: String) {
-        _inputDescription.value = input
-    }
+    fun onTextChanged(input: String) { _inputDescription.value = input }
 
     fun newHabitSubmit() {
-        Log.d("NEWHABITVM", inputDescription.value!!.toString())
         uiScope.launch {
             val newHabit = Habit(inputDescription.value!!.toString())
             insert(newHabit)

@@ -6,6 +6,8 @@
 
 
     <string name="track_button">TRACK</string>
-    <string name="submit_button">SUBMIT</string>
+    <string name="back_text">BACK</string>
+    <string name="next_text">NEXT</string>
+    <string name="submit_text">SUBMIT</string>
     <string name="new_habit">NEW</string>
 </resources>

@@ -29,15 +29,11 @@ class NewHabit : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)
                 .get(NewHabitViewModel::class.java)
 
-        binding.lifecycleOwner = viewLifecycleOwner
         binding.newHabitViewModel = viewModel
 
         binding.editHabitDescription.addTextChangedListener {
-            it?.let {
-                viewModel.onTextChanged(it.toString())
-            }
+            it?.let { viewModel.onTextChanged(it.toString()) }
         }
-
 
         return binding.root
     }

@@ -3,60 +3,74 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="newHabitViewModel"
-            type="com.example.habitstacks.viewmodel.NewHabitViewModel" />
-    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/back_button"
+            style="@style/ButtonStyle"
+            android:layout_marginBottom="92dp"
+            android:text="@string/back_text"
+            app:layout_constraintBottom_toBottomOf="@id/submit_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <Button
+            android:id="@+id/submit_button"
+            style="@style/ButtonStyle"
+            android:layout_marginBottom="24dp"
+            android:onClick="@{() -> newHabitViewModel.newHabitSubmit()}"
+            android:text="@string/submit_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/track_habit_button"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginBottom="24dp"
-                android:background="@color/colorAccent"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/submit_button"
-                android:textColor="#fff"
-                android:textSize="40sp"
-                android:onClick="@{() -> newHabitViewModel.newHabitSubmit()}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0" />
-
-
-            <TextView
-                android:id="@+id/habit_title_prompt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/habit_add_description"
-                android:textAlignment="center"
-                android:textSize="32sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.321" />
+            android:layout_height="360dp"
+            android:layout_margin="16dp"
+            android:padding="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/submit_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.142">
 
             <EditText
                 android:id="@+id/edit_habit_description"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_margin="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/habit_title_prompt"
-                tools:layout_editor_absoluteY="227dp" />
+                android:layout_gravity="bottom"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="80dp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/habit_title_prompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/habit_add_description"
+                android:textAlignment="center"
+                android:textSize="32sp" />
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <data>
+
+        <variable
+            name="newHabitViewModel"
+            type="com.example.habitstacks.viewmodel.NewHabitViewModel" />
+    </data>
 
 </layout>

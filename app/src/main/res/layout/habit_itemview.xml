@@ -34,7 +34,7 @@
                 tools:text="My Habit" />
 
             <Button
-                android:id="@+id/track_habit_button"
+                android:id="@+id/submit_button"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="88dp"
