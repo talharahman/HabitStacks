@@ -12,7 +12,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.habitstacks.R
@@ -51,7 +50,7 @@ class NewHabit : Fragment() {
                 if (it) {
                     binding.layoutDescription.cardviewHabitDescription.visibility = View.VISIBLE
                     binding.layoutDescription.editHabitDescription.addTextChangedListener { input: Editable? ->
-                        input?.let { viewModel.onDescriptionChanged(input.toString()) }
+                        input?.let { viewModel.onDescriptionInputChanged(input.toString()) }
                     }
                 } else binding.layoutDescription.cardviewHabitDescription.visibility = View.GONE
             }
@@ -64,9 +63,9 @@ class NewHabit : Fragment() {
                     binding.layoutRating.ratingRadioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
                         rg?.let {
                             when (id) {
-                                rg[0].id -> viewModel.onRatingChanged(Rating.POSITIVE.name)
-                                rg[1].id -> viewModel.onRatingChanged(Rating.NEUTRAL.name)
-                                rg[2].id -> viewModel.onRatingChanged(Rating.NEGATIVE.name)
+                                rg[0].id -> viewModel.onRatingInputChanged(Rating.POSITIVE.name)
+                                rg[1].id -> viewModel.onRatingInputChanged(Rating.NEUTRAL.name)
+                                rg[2].id -> viewModel.onRatingInputChanged(Rating.NEGATIVE.name)
                             }
                         }
                     }
@@ -81,9 +80,9 @@ class NewHabit : Fragment() {
                     binding.layoutPriority.priorityRadioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
                         rg?.let {
                             when (id) {
-                                rg[0].id -> viewModel.onPriorityChanged(Priority.LOW.name)
-                                rg[1].id -> viewModel.onPriorityChanged(Priority.MEDIUM.name)
-                                rg[2].id -> viewModel.onPriorityChanged(Priority.HIGH.name)
+                                rg[0].id -> viewModel.onPriorityInputChanged(Priority.LOW.name)
+                                rg[1].id -> viewModel.onPriorityInputChanged(Priority.MEDIUM.name)
+                                rg[2].id -> viewModel.onPriorityInputChanged(Priority.HIGH.name)
                             }
                         }
                     }

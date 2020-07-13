@@ -43,15 +43,15 @@ class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
     }
 
 
-    fun onDescriptionChanged(input: String) {
+    fun onDescriptionInputChanged(input: String) {
         inputDescription.value = input
     }
 
-    fun onRatingChanged(input: String) {
+    fun onRatingInputChanged(input: String) {
         inputRating.value = input
     }
 
-    fun onPriorityChanged(input: String) {
+    fun onPriorityInputChanged(input: String) {
         inputPriority.value = input
     }
 
