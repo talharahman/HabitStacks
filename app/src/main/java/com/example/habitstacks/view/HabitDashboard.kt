@@ -33,7 +33,8 @@ class HabitDashboard : Fragment() {
         binding.habitDashboardViewModel = dashBoardViewModel
 
         binding.newHabitButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_dashBoard_to_addNewHabit) }
+            view.findNavController().navigate(R.id.action_dashBoard_to_addNewHabit)
+        }
 
         val adapter = HabitsOverviewAdapter()
         binding.habitsOverview.adapter = adapter

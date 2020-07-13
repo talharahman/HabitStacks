@@ -6,7 +6,7 @@
     <data>
         <variable
             name="habitTracker"
-            type="com.example.habitstacks.model.HabitTracker" />
+            type="com.example.habitstacks.model.HabitTrackerEntry" />
     </data>
 
     <LinearLayout

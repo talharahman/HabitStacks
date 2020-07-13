@@ -1,27 +1,28 @@
 package com.example.habitstacks.database
 
 import android.content.Context
-import androidx.room.*
-import com.example.habitstacks.model.Habit
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.example.habitstacks.model.HabitTrackerEntry
 
-@Database(entities = [Habit::class], version = 1, exportSchema = false)
-abstract class HabitDatabase : RoomDatabase() {
+@Database(entities = [HabitTrackerEntry::class], version = 1, exportSchema = false)
+abstract class TrackerEntryDatabase : RoomDatabase() {
 
-    abstract val habitDao: HabitDao
+    abstract val habitTrackerDao: HabitTrackerDao
 
     companion object {
         @Volatile
-        private var INSTANCE: HabitDatabase? = null
+        private var INSTANCE: TrackerEntryDatabase? = null
 
-        fun getInstance(context: Context): HabitDatabase {
+        fun getInstance(context: Context): TrackerEntryDatabase {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                             context.applicationContext,
-                            HabitDatabase::class.java,
-                            "habit_overview_database")
+                            TrackerEntryDatabase::class.java,
+                            "habit_tracker_database")
                             .fallbackToDestructiveMigration()
                             .build()
                     INSTANCE = instance

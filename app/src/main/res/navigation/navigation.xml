@@ -14,6 +14,9 @@
             android:id="@+id/action_dashBoard_to_addNewHabit"
             app:destination="@id/newHabit"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_dashBoard_to_trackQuestionsOverview"
+            app:destination="@id/trackQuestionsOverview" />
     </fragment>
 
     <fragment
@@ -25,4 +28,11 @@
             android:id="@+id/action_newHabit_to_dashBoard"
             app:destination="@id/dashBoard" />
     </fragment>
+
+    <fragment
+        android:id="@+id/trackQuestionsOverview"
+        android:name="com.example.habitstacks.view.TrackQuestionsOverview"
+        android:label="track_questions_overview"
+        tools:layout="@layout/track_questions_overview"/>
+
 </navigation>

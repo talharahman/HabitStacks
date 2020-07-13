@@ -19,7 +19,9 @@ class TrackQuestionViewModel(dataSource: HabitDao) : ViewModel()  {
     private val inputLocation = MutableLiveData<String>()
     private val inputEmotion = MutableLiveData<String>()
     private val inputAction = MutableLiveData<String>()
+
     val isInputReceived = MutableLiveData<Boolean?>()
+    val trackerEntries = dataBase.getAllHabits()
 
     private val _backButtonVisible = MutableLiveData<Boolean>()
     val backButtonVisible: LiveData<Boolean> get() = _backButtonVisible

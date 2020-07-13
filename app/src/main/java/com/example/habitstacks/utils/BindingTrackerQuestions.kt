@@ -2,24 +2,24 @@ package com.example.habitstacks.utils
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.habitstacks.model.HabitTracker
+import com.example.habitstacks.model.HabitTrackerEntry
 
 @BindingAdapter("trackerLocationText")
-fun TextView.setTrackerLocationText(item: HabitTracker?) {
+fun TextView.setTrackerLocationText(item: HabitTrackerEntry?) {
     item?.let {
         text = item.trackLocation
     }
 }
 
 @BindingAdapter("trackerEmotionText")
-fun TextView.setTrackerEmotionText(item: HabitTracker?) {
+fun TextView.setTrackerEmotionText(item: HabitTrackerEntry?) {
     item?.let {
         text = item.trackEmotion
     }
 }
 
 @BindingAdapter("trackerActionText")
-fun TextView.setTrackerActionText(item: HabitTracker?) {
+fun TextView.setTrackerActionText(item: HabitTrackerEntry?) {
     item?.let {
         text = item.trackAction
     }
