@@ -14,7 +14,7 @@
         android:id="@+id/cardview_rating"
         style="@style/CardViewStyle"
         android:enabled="@{newHabitViewModel.cardViewRatingVisible}"
-        app:layout_constraintBottom_toTopOf="@+id/back_button"
+        app:layout_constraintBottom_toTopOf="@+id/habit_back_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

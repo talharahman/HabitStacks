@@ -15,19 +15,19 @@
         android:background="@color/colorBackground">
 
         <Button
-            android:id="@+id/back_button"
+            android:id="@+id/habit_back_button"
             style="@style/ButtonStyle"
             android:layout_marginBottom="92dp"
             android:text="@string/back_text"
             android:enabled="@{newHabitViewModel.backButtonVisible}"
             android:onClick="@{() -> newHabitViewModel.navigateToPreviousView()}"
-            app:layout_constraintBottom_toBottomOf="@id/submit_button"
+            app:layout_constraintBottom_toBottomOf="@id/habit_submit_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/submit_button"
+            android:id="@+id/habit_submit_button"
             style="@style/ButtonStyle"
             android:layout_marginBottom="24dp"
             android:onClick="@{() -> newHabitViewModel.navigateToNextView()}"
@@ -38,15 +38,15 @@
 
         <include
             android:id="@+id/layout_description"
-            layout="@layout/cardview_description"/>
+            layout="@layout/description_input"/>
 
         <include
             android:id="@+id/layout_rating"
-            layout="@layout/cardview_rating"/>
+            layout="@layout/rating_input"/>
 
         <include
             android:id="@+id/layout_priority"
-            layout="@layout/cardview_priority"/>
+            layout="@layout/priority_input"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

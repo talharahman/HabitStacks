@@ -4,39 +4,39 @@
 
     <data>
         <variable
-            name="newHabitViewModel"
-            type="com.example.habitstacks.viewmodel.NewHabitViewModel" />
+            name="trackQuestionViewModel"
+            type="com.example.habitstacks.viewmodel.TrackQuestionViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_habit_description"
+        android:id="@+id/cardview_track_action"
         style="@style/CardViewStyle"
-        android:enabled="@{newHabitViewModel.cardViewDescriptionVisible}"
-        app:layout_constraintBottom_toTopOf="@+id/back_button"
+        android:enabled="@{trackQuestionViewModel.cardViewActionVisible}"
+        app:layout_constraintBottom_toTopOf="@+id/track_back_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.142">
 
         <EditText
-            android:id="@+id/edit_habit_description"
+            android:id="@+id/edit_track_action"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="80dp" />
+            android:layout_marginBottom="100dp" />
 
         <TextView
-            android:id="@+id/habit_title_prompt"
+            android:id="@+id/track_action_prompt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="sans-serif-smallcaps"
-            android:text="@string/habit_add_description"
+            android:text="@string/track_action_description"
             android:textAlignment="center"
             android:textSize="32sp" />
 

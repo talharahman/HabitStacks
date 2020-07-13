@@ -40,8 +40,8 @@ class NewHabit : Fragment() {
 
         viewModel.backButtonVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
-                if (it) binding.backButton.visibility = View.VISIBLE
-                else binding.backButton.visibility = View.GONE
+                if (it) binding.habitBackButton.visibility = View.VISIBLE
+                else binding.habitBackButton.visibility = View.GONE
             }
         })
 
