@@ -13,18 +13,18 @@ interface HabitDao {
     @Insert
     fun insert(habit: Habit)
 
-//    @Update
-//    fun update(habit: Habit)
+    @Update
+    fun update(habit: Habit)
 
-//    @Query("SELECT * from habits_table WHERE habitId = :key")
-//    fun get(key: Long): Habit
+    @Query("SELECT * from habits_table WHERE habitId = :key")
+    fun get(key: Long): Habit
 
-//    @Query("DELETE from habits_table")
-//    fun clear()
+    @Query("DELETE from habits_table")
+    fun clear()
 
     @Query("SELECT * from habits_table ORDER BY habitId DESC")
     fun getAllHabits(): LiveData<List<Habit>>
 
-//    @Query("SELECT * from habits_table WHERE habitId = :key")
-//    fun getHabitWithId(key: Long): LiveData<Habit>
+    @Query("SELECT * from habits_table WHERE habitId = :key")
+    fun getHabitWithId(key: Long): LiveData<Habit>
 }

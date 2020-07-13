@@ -19,6 +19,8 @@ data class Habit(
         var habitId: Long = 0L
 }
 
+//data class
+
 enum class Rating { POSITIVE, NEUTRAL, NEGATIVE }
 
 enum class Priority { LOW, MEDIUM, HIGH }

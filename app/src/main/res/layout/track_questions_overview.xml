@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="habitDashboardViewModel"
-            type="com.example.habitstacks.viewmodel.HabitDashboardViewModel" />
+            name="trackQuestionViewModel"
+            type="com.example.habitstacks.viewmodel.TrackQuestionViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,26 +15,27 @@
         android:background="@color/colorBackground">
 
         <TextView
-            android:id="@+id/select_habit_text"
+            android:id="@+id/current_habit_text"
             style="@style/TextStyle"
-            android:layout_marginTop="44dp"
-            android:text="@string/habit_select_text"
+            android:layout_marginTop="40dp"
+            android:textSize="36sp"
+            tools:text="My Current Habit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/habits_overview"
+            android:id="@+id/track_questions_overview"
             android:layout_width="match_parent"
             android:layout_height="360dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_habit_text" />
+            app:layout_constraintTop_toBottomOf="@+id/current_habit_text" />
 
         <Button
-            android:id="@+id/new_habit_button"
+            android:id="@+id/new_track_button"
             style="@style/ButtonStyle"
             android:background="@color/colorPrimary"
             android:layout_marginBottom="24dp"
@@ -44,5 +45,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

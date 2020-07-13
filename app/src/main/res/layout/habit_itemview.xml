@@ -26,7 +26,7 @@
                 android:layout_marginEnd="80dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/track_button"
+                app:layout_constraintBottom_toTopOf="@id/goal_button"
                 app:layout_constraintTop_toBottomOf="@id/habit_description">
 
                 <ImageView
@@ -72,20 +72,20 @@
 
 
             <Button
-                android:id="@+id/track_button"
+                android:id="@+id/goal_button"
                 style="@style/ButtonStyle"
                 android:layout_marginBottom="128dp"
-                android:text="@string/track_text"
+                android:text="@string/goal_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
-                android:id="@+id/focus_button"
+                android:id="@+id/track_button"
                 style="@style/ButtonStyle"
                 android:layout_marginBottom="40dp"
-                android:text="@string/focus_text"
+                android:text="@string/track_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

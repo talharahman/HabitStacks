@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="habit"
+            type="com.example.habitstacks.model.Habit" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/current_date_time"
+            style="@style/TextStyle"
+            android:layout_marginTop="20dp"
+            tools:text="Monday, July 13, 12:43PM" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/location_placeholder"
+                    style="@style/TextStyle"
+                    android:text="@string/location_text"
+                    android:textAlignment="textStart"
+                    android:layout_marginTop="20dp"
+                    android:padding="8dp"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    app:layout_constraintBottom_toTopOf="@id/location_input_display" />
+
+                <TextView
+                    android:id="@+id/location_input_display"
+                    style="@style/TextStyle"
+                    android:padding="8dp"
+                    android:textAlignment="textStart"
+                    tools:text="Grandmas house" />
+
+                <TextView
+                    android:id="@+id/emotion_placeholder"
+                    style="@style/TextStyle"
+                    android:text="@string/emotion_text"
+                    android:textAlignment="textStart"
+                    android:padding="8dp"
+                    android:textColor="@color/design_default_color_primary_dark" />
+
+                <TextView
+                    android:id="@+id/emotion_input_display"
+                    style="@style/TextStyle"
+                    android:padding="8dp"
+                    android:textAlignment="textStart"
+                    tools:text="Happy"/>
+
+                <TextView
+                    android:id="@+id/action_placeholder"
+                    style="@style/TextStyle"
+                    android:text="@string/action_text"
+                    android:textAlignment="textStart"
+                    android:padding="8dp"
+                    android:textColor="@color/design_default_color_primary_dark" />
+
+                <TextView
+                    android:id="@+id/action_input_display"
+                    style="@style/TextStyle"
+                    android:padding="8dp"
+                    android:textAlignment="textStart"
+                    android:layout_marginBottom="20dp"
+                    tools:text="Cleaning" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>
