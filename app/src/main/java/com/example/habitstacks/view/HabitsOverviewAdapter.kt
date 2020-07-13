@@ -24,6 +24,7 @@ class HabitsOverviewAdapter : ListAdapter<Habit, HabitsOverviewAdapter.ViewHolde
 
         fun bind(item: Habit) {
             binding.habit = item
+            binding.executePendingBindings()
         }
 
         companion object {

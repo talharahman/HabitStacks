@@ -21,11 +21,6 @@ abstract class HabitDatabase : RoomDatabase() {
         private var INSTANCE: HabitDatabase? = null
 
         fun getInstance(context: Context): HabitDatabase {
-            /**
-             * Multiple threads can ask for the database at the same time,
-             * ensure we only initialize it once by using synchronized.
-             * Only one thread may enter a synchronized block at a time.
-             */
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
@@ -33,6 +28,7 @@ abstract class HabitDatabase : RoomDatabase() {
                             context.applicationContext,
                             HabitDatabase::class.java,
                             "habit_tracking_database")
+                            .fallbackToDestructiveMigration()
                             .build()
                     INSTANCE = instance
                 }

@@ -11,9 +11,9 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView_positiveOr_negative"
+        android:id="@+id/cardview_rating"
         style="@style/CardViewStyle"
-        android:enabled="@{newHabitViewModel.cardViewPosNegVisible}"
+        android:enabled="@{newHabitViewModel.cardViewRatingVisible}"
         app:layout_constraintBottom_toTopOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

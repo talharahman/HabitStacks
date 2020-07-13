@@ -9,7 +9,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView_habitDescription"
+        android:id="@+id/cardview_habit_description"
         style="@style/CardViewStyle"
         android:enabled="@{newHabitViewModel.cardViewDescriptionVisible}"
         app:layout_constraintBottom_toTopOf="@+id/back_button"

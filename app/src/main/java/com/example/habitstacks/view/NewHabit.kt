@@ -2,18 +2,22 @@ package com.example.habitstacks.view
 
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
+import androidx.core.view.get
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProvider
 import com.example.habitstacks.R
 import com.example.habitstacks.database.HabitDatabase
 import com.example.habitstacks.databinding.NewHabitBinding
+import com.example.habitstacks.model.Priority
+import com.example.habitstacks.model.Rating
 import com.example.habitstacks.viewmodel.NewHabitViewModel
 import com.example.habitstacks.viewmodel.NewHabitViewModelFactory
 
@@ -43,26 +47,45 @@ class NewHabit : Fragment() {
         viewModel.cardViewDescriptionVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
-                    binding.layoutAddDescription.cardViewHabitDescription.visibility = View.VISIBLE
-                    binding.layoutAddDescription.editHabitDescription.addTextChangedListener { input: Editable? ->
-                        input?.let { viewModel.onTextChanged(input.toString()) }
+                    binding.layoutDescription.cardviewHabitDescription.visibility = View.VISIBLE
+                    binding.layoutDescription.editHabitDescription.addTextChangedListener { input: Editable? ->
+                        input?.let { viewModel.onDescriptionChanged(input.toString()) }
                     }
-                }
-                else binding.layoutAddDescription.cardViewHabitDescription.visibility = View.GONE
+                } else binding.layoutDescription.cardviewHabitDescription.visibility = View.GONE
             }
         })
 
-        viewModel.cardViewPosNegVisible.observe(viewLifecycleOwner, Observer {
+        viewModel.cardViewRatingVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
-                if (it) binding.layoutPositiveNegative.cardViewPositiveOrNegative.visibility = View.VISIBLE
-                else binding.layoutPositiveNegative.cardViewPositiveOrNegative.visibility = View.GONE
+                if (it) {
+                    binding.layoutRating.cardviewRating.visibility = View.VISIBLE
+                    binding.layoutRating.questionRadioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
+                        rg?.let {
+                            when (id) {
+                                rg[0].id -> viewModel.onRatingChanged(Rating.POSITIVE.name)
+                                rg[1].id -> viewModel.onRatingChanged(Rating.NEUTRAL.name)
+                                rg[2].id -> viewModel.onRatingChanged(Rating.NEGATIVE.name)
+                            }
+                        }
+                    }
+                } else binding.layoutRating.cardviewRating.visibility = View.GONE
             }
         })
 
         viewModel.cardViewPriorityVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
-                if (it) binding.layoutPriority.cardviewPriority.visibility = View.VISIBLE
-                else binding.layoutPriority.cardviewPriority.visibility = View.GONE
+                if (it) {
+                    binding.layoutPriority.cardviewPriority.visibility = View.VISIBLE
+                    binding.layoutPriority.priorityRadioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
+                        rg?.let {
+                            when (id) {
+                                rg[0].id -> viewModel.onPriorityChanged(Priority.LOW.name)
+                                rg[1].id -> viewModel.onPriorityChanged(Priority.MEDIUM.name)
+                                rg[2].id -> viewModel.onPriorityChanged(Priority.HIGH.name)
+                            }
+                        }
+                    }
+                } else binding.layoutPriority.cardviewPriority.visibility = View.GONE
             }
         })
 

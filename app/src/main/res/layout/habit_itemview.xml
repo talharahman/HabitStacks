@@ -32,23 +32,27 @@
                 <ImageView
                     android:id="@+id/icon_priority_low"
                     style="@style/IconStyle"
+                    app:lowPriority="@{habit}"
                     app:srcCompat="@drawable/ic_baseline_priority"/>
 
                 <ImageView
                     android:id="@+id/icon_priority_med"
                     style="@style/IconStyle"
+                    app:medPriority="@{habit}"
                     app:srcCompat="@drawable/ic_baseline_priority"/>
 
                 <ImageView
                     android:id="@+id/icon_priority_high"
                     style="@style/IconStyle"
+                    app:highPriority="@{habit}"
                     app:srcCompat="@drawable/ic_baseline_priority"/>
 
                 <ImageView
+                    android:id="@+id/icon_rating"
                     style="@style/IconStyle"
                     android:layout_marginStart="70dp"
-                    app:srcCompat="@drawable/ic_baseline_thumb_up"
-                    />
+                    app:habitRatingIcon="@{habit}"
+                    app:srcCompat="@drawable/ic_baseline_thumb_up" />
 
             </LinearLayout>
 
@@ -60,10 +64,10 @@
                 android:layout_marginTop="24dp"
                 android:fontFamily="sans-serif-smallcaps"
                 android:textSize="40sp"
+                app:habitDescriptionText="@{habit}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:habitDescription="@{habit}"
                 tools:text="My Habit" />
 
 

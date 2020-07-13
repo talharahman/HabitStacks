@@ -36,12 +36,12 @@
             app:layout_constraintHorizontal_bias="0.0" />
 
         <include
-            android:id="@+id/layout_add_description"
-            layout="@layout/cardview_add_description"/>
+            android:id="@+id/layout_description"
+            layout="@layout/cardview_description"/>
 
         <include
-            android:id="@+id/layout_positive_negative"
-            layout="@layout/cardview_positive_negative"/>
+            android:id="@+id/layout_rating"
+            layout="@layout/cardview_rating"/>
 
         <include
             android:id="@+id/layout_priority"
