@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="habit"
-            type="com.example.habitstacks.model.Habit" />
+            name="habitTracker"
+            type="com.example.habitstacks.model.HabitTracker" />
     </data>
 
     <LinearLayout
@@ -45,6 +45,7 @@
                     style="@style/TextStyle"
                     android:padding="8dp"
                     android:textAlignment="textStart"
+                    app:trackerLocationText="@{habitTracker}"
                     tools:text="Grandmas house" />
 
                 <TextView
@@ -60,6 +61,7 @@
                     style="@style/TextStyle"
                     android:padding="8dp"
                     android:textAlignment="textStart"
+                    app:trackerEmotionText="@{habitTracker}"
                     tools:text="Happy"/>
 
                 <TextView
@@ -76,6 +78,7 @@
                     android:padding="8dp"
                     android:textAlignment="textStart"
                     android:layout_marginBottom="20dp"
+                    app:trackerActionText="@{habitTracker}"
                     tools:text="Cleaning" />
 
 

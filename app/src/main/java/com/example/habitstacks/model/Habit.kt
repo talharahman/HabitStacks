@@ -17,9 +17,25 @@ data class Habit(
 
         @PrimaryKey(autoGenerate = true)
         var habitId: Long = 0L
+
+        @ColumnInfo(name = "habit_tracker_entries")
+        var trackEntries: MutableList<HabitTracker?> = mutableListOf(null)
 }
 
-//data class
+@Entity(tableName = "habit_tracker_table")
+data class HabitTracker(
+        @ColumnInfo(name = "track_location")
+        var trackLocation: String,
+
+        @ColumnInfo(name = "track_emotion")
+        var trackEmotion: String,
+
+        @ColumnInfo(name = "track_action")
+        var trackAction: String) {
+
+        @PrimaryKey(autoGenerate = true)
+        var trackId: Long = 0L
+}
 
 enum class Rating { POSITIVE, NEUTRAL, NEGATIVE }
 

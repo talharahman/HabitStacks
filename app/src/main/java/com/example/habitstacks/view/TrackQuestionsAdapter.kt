@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.habitstacks.databinding.HabitItemviewBinding
-import com.example.habitstacks.model.Habit
+import com.example.habitstacks.databinding.TrackQuestionsItemviewBinding
+import com.example.habitstacks.model.HabitTracker
 
-class HabitsOverviewAdapter : ListAdapter<Habit, HabitsOverviewAdapter.ViewHolder>(HabitDiffCallback()) {
+class TrackQuestionsAdapter : ListAdapter<HabitTracker, TrackQuestionsAdapter.ViewHolder>(TrackDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -18,32 +18,34 @@ class HabitsOverviewAdapter : ListAdapter<Habit, HabitsOverviewAdapter.ViewHolde
         holder.bind(getItem(position)!!)
     }
 
-    class ViewHolder(private var binding: HabitItemviewBinding
+
+    class ViewHolder(private var binding: TrackQuestionsItemviewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Habit) {
-            binding.habit = item
+        fun bind(item: HabitTracker) {
+            binding.habitTracker = item
             binding.executePendingBindings()
         }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = HabitItemviewBinding
-                        .inflate(layoutInflater, parent, false)
+                val binding = TrackQuestionsItemviewBinding.inflate(
+                        layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
     }
 }
 
-class HabitDiffCallback : DiffUtil.ItemCallback<Habit>() {
+class TrackDiffCallback : DiffUtil.ItemCallback<HabitTracker>() {
 
-    override fun areItemsTheSame(oldItem: Habit, newItem: Habit): Boolean {
-        return oldItem.habitId == newItem.habitId
+    override fun areItemsTheSame(oldItem: HabitTracker, newItem: HabitTracker): Boolean {
+        return oldItem.trackId == newItem.trackId
     }
 
-    override fun areContentsTheSame(oldItem: Habit, newItem: Habit): Boolean {
+    override fun areContentsTheSame(oldItem: HabitTracker, newItem: HabitTracker): Boolean {
         return oldItem == newItem
     }
+
 }
