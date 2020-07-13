@@ -33,26 +33,26 @@
                     android:id="@+id/icon_priority_low"
                     style="@style/IconStyle"
                     app:lowPriority="@{habit}"
-                    app:srcCompat="@drawable/ic_baseline_priority"/>
+                    tools:srcCompat="@drawable/ic_baseline_priority"/>
 
                 <ImageView
                     android:id="@+id/icon_priority_med"
                     style="@style/IconStyle"
                     app:medPriority="@{habit}"
-                    app:srcCompat="@drawable/ic_baseline_priority"/>
+                    tools:srcCompat="@drawable/ic_baseline_priority"/>
 
                 <ImageView
                     android:id="@+id/icon_priority_high"
                     style="@style/IconStyle"
                     app:highPriority="@{habit}"
-                    app:srcCompat="@drawable/ic_baseline_priority"/>
+                    tools:srcCompat="@drawable/ic_baseline_priority"/>
 
                 <ImageView
                     android:id="@+id/icon_rating"
                     style="@style/IconStyle"
                     android:layout_marginStart="70dp"
                     app:habitRatingIcon="@{habit}"
-                    app:srcCompat="@drawable/ic_baseline_thumb_up" />
+                    tools:srcCompat="@drawable/ic_baseline_thumb_up" />
 
             </LinearLayout>
 

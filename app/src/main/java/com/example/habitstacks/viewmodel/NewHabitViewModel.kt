@@ -1,14 +1,11 @@
 package com.example.habitstacks.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.habitstacks.database.HabitDao
 import com.example.habitstacks.model.Habit
-import com.example.habitstacks.model.Priority
-import com.example.habitstacks.model.Rating
 import kotlinx.coroutines.*
 
 class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
@@ -18,16 +15,10 @@ class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-
-    private val _inputDescription = MutableLiveData<String>()
-    val inputDescription: LiveData<String> get() = _inputDescription
-
-    private val _inputRating = MutableLiveData<String>()
-    val inputRating: LiveData<String> get() = _inputRating
-
-    private val _inputPriority = MutableLiveData<String>()
-    val inputPriority: LiveData<String> get() = _inputPriority
-
+    private val inputDescription = MutableLiveData<String>()
+    private val inputRating = MutableLiveData<String>()
+    private val inputPriority = MutableLiveData<String>()
+    val isInputReceived = MutableLiveData<Boolean?>()
 
     private val _backButtonVisible = MutableLiveData<Boolean>()
     val backButtonVisible: LiveData<Boolean> get() = _backButtonVisible
@@ -48,40 +39,45 @@ class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
         _cardViewRatingVisible.value = false
         _cardViewPriorityVisible.value = false
         habitCardPosition = NewHabitCards.DESCRIPTION
+        isInputReceived.value = null
     }
 
 
     fun onDescriptionChanged(input: String) {
-        _inputDescription.value = input
-        Log.d("NEWHABITVM", inputDescription.value.toString())
+        inputDescription.value = input
     }
 
     fun onRatingChanged(input: String) {
-        _inputRating.value = input
-        Log.d("NEWHABITVM", inputRating.value.toString())
+        inputRating.value = input
     }
 
     fun onPriorityChanged(input: String) {
-        _inputPriority.value = input
-        Log.d("NEWHABITVM", inputPriority.value.toString())
+        inputPriority.value = input
     }
 
 
     fun navigateToNextView() {
         when (habitCardPosition.name) {
             "DESCRIPTION" -> {
-                _cardViewDescriptionVisible.value = false
-                _cardViewRatingVisible.value = true
-                _backButtonVisible.value = true
-                habitCardPosition = NewHabitCards.QUESTION
+                if (inputDescription.value != null) {
+                    _cardViewDescriptionVisible.value = false
+                    _cardViewRatingVisible.value = true
+                    _backButtonVisible.value = true
+                    habitCardPosition = NewHabitCards.RATING
+                } else isInputReceived.value = false
             }
-            "QUESTION" -> {
-                _cardViewRatingVisible.value = false
-                _cardViewPriorityVisible.value = true
-                habitCardPosition = NewHabitCards.PRIORITY
+            "RATING" -> {
+                if (inputRating.value != null) {
+                    _cardViewRatingVisible.value = false
+                    _cardViewPriorityVisible.value = true
+                    habitCardPosition = NewHabitCards.PRIORITY
+                } else isInputReceived.value = false
             }
             "PRIORITY" -> {
-                 newHabitSubmit()
+                if (inputPriority.value != null) {
+                    newHabitSubmit()
+                    isInputReceived.value = true
+                } else isInputReceived.value = false
             }
         }
     }
@@ -91,7 +87,7 @@ class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
             "DESCRIPTION" -> {
                 _backButtonVisible.value = false
             }
-            "QUESTION" -> {
+            "RATING" -> {
                 _cardViewRatingVisible.value = false
                 _cardViewDescriptionVisible.value = true
                 habitCardPosition = NewHabitCards.DESCRIPTION
@@ -99,7 +95,7 @@ class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
             "PRIORITY" -> {
                 _cardViewPriorityVisible.value = false
                 _cardViewRatingVisible.value = true
-                habitCardPosition = NewHabitCards.QUESTION
+                habitCardPosition = NewHabitCards.RATING
             }
         }
     }
@@ -139,4 +135,4 @@ class NewHabitViewModelFactory(
     }
 }
 
-enum class NewHabitCards { DESCRIPTION, QUESTION, PRIORITY }
+enum class NewHabitCards { DESCRIPTION, RATING, PRIORITY }

@@ -27,7 +27,7 @@
             android:text="@string/habit_add_question" />
 
         <RadioGroup
-            android:id="@+id/question_radio_group"
+            android:id="@+id/rating_radio_group"
             style="@style/RadioButtonStyle"
             android:layout_marginStart="30dp"
             android:layout_marginTop="160dp"

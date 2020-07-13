@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.core.view.get
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.habitstacks.R
 import com.example.habitstacks.database.HabitDatabase
 import com.example.habitstacks.databinding.NewHabitBinding
@@ -59,7 +61,7 @@ class NewHabit : Fragment() {
             it?.let {
                 if (it) {
                     binding.layoutRating.cardviewRating.visibility = View.VISIBLE
-                    binding.layoutRating.questionRadioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
+                    binding.layoutRating.ratingRadioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
                         rg?.let {
                             when (id) {
                                 rg[0].id -> viewModel.onRatingChanged(Rating.POSITIVE.name)
@@ -86,6 +88,13 @@ class NewHabit : Fragment() {
                         }
                     }
                 } else binding.layoutPriority.cardviewPriority.visibility = View.GONE
+            }
+        })
+
+        viewModel.isInputReceived.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) requireView().findNavController().navigate(R.id.action_newHabit_to_dashBoard)
+                else Toast.makeText(requireContext(), "Must fill in requirements", Toast.LENGTH_SHORT).show()
             }
         })
 
