@@ -1,4 +1,4 @@
-package com.example.habitstacks.utils
+package com.example.habitstacks.recyclerview
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter

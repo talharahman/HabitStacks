@@ -12,8 +12,7 @@
         tools:layout="@layout/habit_dashboard">
         <action
             android:id="@+id/action_dashBoard_to_addNewHabit"
-            app:destination="@id/newHabit"
-            app:popUpToInclusive="false" />
+            app:destination="@id/newHabit" />
         <action
             android:id="@+id/action_dashBoard_to_trackQuestionsOverview"
             app:destination="@id/trackQuestionsOverview" />
@@ -21,7 +20,7 @@
 
     <fragment
         android:id="@+id/newHabit"
-        android:name="com.example.habitstacks.view.NewHabit"
+        android:name="com.example.habitstacks.view.NewHabitFragment"
         android:label="new_habit"
         tools:layout="@layout/new_habit" >
         <action
@@ -33,6 +32,12 @@
         android:id="@+id/trackQuestionsOverview"
         android:name="com.example.habitstacks.view.TrackQuestionsOverview"
         android:label="track_questions_overview"
-        tools:layout="@layout/track_questions_overview"/>
+        tools:layout="@layout/track_questions_overview">
+        <argument
+            android:name="associatedHabit"
+            app:argType="String"/>
+    </fragment>
+
+
 
 </navigation>

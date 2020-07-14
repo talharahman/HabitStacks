@@ -1,4 +1,4 @@
-package com.example.habitstacks.view
+package com.example.habitstacks.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.habitstacks.databinding.TrackQuestionsItemviewBinding
 import com.example.habitstacks.model.HabitTrackerEntry
 
-class TrackQuestionsAdapter : ListAdapter<HabitTrackerEntry, TrackQuestionsAdapter.ViewHolder>(TrackDiffCallback()) {
+class TrackQuestionsAdapter : ListAdapter<HabitTrackerEntry, TrackQuestionsAdapter.ViewHolder>(TrackDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -16,6 +16,18 @@ class TrackQuestionsAdapter : ListAdapter<HabitTrackerEntry, TrackQuestionsAdapt
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position)!!)
+    }
+
+    companion object TrackDiffCallback : DiffUtil.ItemCallback<HabitTrackerEntry>() {
+
+        override fun areItemsTheSame(oldItem: HabitTrackerEntry, newItem: HabitTrackerEntry): Boolean {
+            return oldItem.trackId == newItem.trackId
+        }
+
+        override fun areContentsTheSame(oldItem: HabitTrackerEntry, newItem: HabitTrackerEntry): Boolean {
+            return oldItem == newItem
+        }
+
     }
 
 
@@ -36,16 +48,4 @@ class TrackQuestionsAdapter : ListAdapter<HabitTrackerEntry, TrackQuestionsAdapt
             }
         }
     }
-}
-
-class TrackDiffCallback : DiffUtil.ItemCallback<HabitTrackerEntry>() {
-
-    override fun areItemsTheSame(oldItem: HabitTrackerEntry, newItem: HabitTrackerEntry): Boolean {
-        return oldItem.trackId == newItem.trackId
-    }
-
-    override fun areContentsTheSame(oldItem: HabitTrackerEntry, newItem: HabitTrackerEntry): Boolean {
-        return oldItem == newItem
-    }
-
 }

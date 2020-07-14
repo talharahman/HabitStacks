@@ -22,22 +22,37 @@ import com.example.habitstacks.model.Rating
 import com.example.habitstacks.viewmodel.NewHabitViewModel
 import com.example.habitstacks.viewmodel.NewHabitViewModelFactory
 
-class NewHabit : Fragment() {
+class NewHabitFragment : Fragment() {
+
+    private lateinit var binding: NewHabitBinding
+    private lateinit var viewModel: NewHabitViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val binding: NewHabitBinding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
                 inflater, R.layout.new_habit, container, false)
 
-        val dataSource = HabitDatabase.getInstance(requireContext()).habitDao
+        initBackend()
+        initObservers()
+
+        return binding.root
+    }
+
+    private fun initBackend() {
+        val dataSource = HabitDatabase
+                .getInstance(requireContext())
+                .habitDao
         val viewModelFactory = NewHabitViewModelFactory(dataSource)
-        val viewModel = ViewModelProvider(this, viewModelFactory)
+        viewModel = ViewModelProvider(this, viewModelFactory)
                 .get(NewHabitViewModel::class.java)
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.newHabitViewModel = viewModel
+    }
 
+
+    private fun initObservers() {
         viewModel.backButtonVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) binding.habitBackButton.visibility = View.VISIBLE
@@ -96,7 +111,5 @@ class NewHabit : Fragment() {
                 else Toast.makeText(requireContext(), "Must fill in requirements", Toast.LENGTH_SHORT).show()
             }
         })
-
-        return binding.root
     }
 }

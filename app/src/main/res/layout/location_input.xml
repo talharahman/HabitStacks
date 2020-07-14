@@ -5,7 +5,7 @@
     <data>
         <variable
             name="trackQuestionViewModel"
-            type="com.example.habitstacks.viewmodel.TrackQuestionViewModel" />
+            type="com.example.habitstacks.viewmodel.NewTrackerViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

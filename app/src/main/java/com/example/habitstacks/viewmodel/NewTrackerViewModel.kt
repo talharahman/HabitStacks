@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.habitstacks.database.HabitDao
+import com.example.habitstacks.database.HabitTrackerDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 
-class TrackQuestionViewModel(dataSource: HabitDao) : ViewModel()  {
+class NewTrackerViewModel(dataSource: HabitTrackerDao) : ViewModel()  {
 
     private val dataBase = dataSource
     private var trackCardPosition: TrackQuestionCards
@@ -21,7 +21,6 @@ class TrackQuestionViewModel(dataSource: HabitDao) : ViewModel()  {
     private val inputAction = MutableLiveData<String>()
 
     val isInputReceived = MutableLiveData<Boolean?>()
-    val trackerEntries = dataBase.getAllHabits()
 
     private val _backButtonVisible = MutableLiveData<Boolean>()
     val backButtonVisible: LiveData<Boolean> get() = _backButtonVisible
@@ -114,12 +113,12 @@ class TrackQuestionViewModel(dataSource: HabitDao) : ViewModel()  {
 
 
 @Suppress("UNCHECKED_CAST")
-class TrackQuestionViewModelFactory(
-        private val dataSource: HabitDao): ViewModelProvider.Factory {
+class NewTrackerViewModelFactory(
+        private val dataSource: HabitTrackerDao): ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(TrackQuestionViewModel::class.java)) {
-            return TrackQuestionViewModel(dataSource) as T
+        if (modelClass.isAssignableFrom(NewTrackerViewModel::class.java)) {
+            return NewTrackerViewModel(dataSource) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

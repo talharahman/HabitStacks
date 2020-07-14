@@ -115,7 +115,6 @@ class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
         withContext(Dispatchers.IO) { dataBase.insert(habit) }
     }
 
-
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
