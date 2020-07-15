@@ -15,7 +15,7 @@ fun TextView.setTrackerEntryTime(item: HabitTrackerEntry?) {
 
 @SuppressLint("SimpleDateFormat")
 fun convertLongToDateString(systemTime: Long): String {
-    return SimpleDateFormat("EEEE MMM-dd-yyyy' Time: 'HH:mm")
+    return SimpleDateFormat("EEEE MMM-dd-yyyy' 'HH:mm")
             .format(systemTime).toString()
 }
 
