@@ -6,7 +6,7 @@
     <data>
         <variable
             name="newHabitViewModel"
-            type="com.example.habitstacks.viewmodel.NewHabitViewModel" />
+            type="com.example.habitstacks.viewmodel.NewEditHabitViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

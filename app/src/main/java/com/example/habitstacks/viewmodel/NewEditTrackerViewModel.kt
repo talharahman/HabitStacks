@@ -8,8 +8,9 @@ import com.example.habitstacks.database.TrackerEntryDao
 import com.example.habitstacks.model.HabitTrackerEntry
 import kotlinx.coroutines.*
 
-class NewTrackerViewModel(private val dataSource: TrackerEntryDao,
-                          private val habitDescription: String) : ViewModel() {
+class NewEditTrackerViewModel(private val dataSource: TrackerEntryDao,
+                              private val habitDescription: String,
+                              private val trackerEntry: HabitTrackerEntry?) : ViewModel() {
 
     private var trackCardPosition: TrackQuestionCards
     private val viewModelJob = Job()
@@ -75,7 +76,9 @@ class NewTrackerViewModel(private val dataSource: TrackerEntryDao,
             }
             "ACTION" -> {
                 if (inputAction.value != null) {
-                    newTrackEntrySubmit()
+                    if (trackerEntry == null) newTrackEntrySubmit()
+                    else editTrackerSubmit()
+
                     isInputReceived.value = true
                 } else isInputReceived.value = false
             }
@@ -116,6 +119,21 @@ class NewTrackerViewModel(private val dataSource: TrackerEntryDao,
         withContext(Dispatchers.IO) { dataSource.insert(trackerEntry) }
     }
 
+    private fun editTrackerSubmit() {
+        uiScope.launch {
+            trackerEntry?.let {
+                trackerEntry.trackLocation = inputLocation.value!!
+                trackerEntry.trackEmotion = inputEmotion.value!!
+                trackerEntry.trackAction = inputAction.value!!
+                update(trackerEntry)
+            }
+        }
+    }
+
+    private suspend fun update(trackerEntry: HabitTrackerEntry) {
+        withContext(Dispatchers.IO) { dataSource.update(trackerEntry) }
+    }
+
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
@@ -125,13 +143,14 @@ class NewTrackerViewModel(private val dataSource: TrackerEntryDao,
 
 
 @Suppress("UNCHECKED_CAST")
-class NewTrackerViewModelFactory(
+class NewEditTrackerViewModelFactory(
         private val dataSource: TrackerEntryDao,
-        private val selectedHabit: String) : ViewModelProvider.Factory {
+        private val selectedHabit: String,
+        private val trackerEntry: HabitTrackerEntry?) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(NewTrackerViewModel::class.java)) {
-            return NewTrackerViewModel(dataSource, selectedHabit) as T
+        if (modelClass.isAssignableFrom(NewEditTrackerViewModel::class.java)) {
+            return NewEditTrackerViewModel(dataSource, selectedHabit, trackerEntry) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

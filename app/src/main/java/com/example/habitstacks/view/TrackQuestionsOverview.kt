@@ -14,9 +14,7 @@ import com.example.habitstacks.databinding.TrackQuestionsOverviewBinding
 import com.example.habitstacks.R
 import com.example.habitstacks.database.TrackerEntryDatabase
 import com.example.habitstacks.model.HabitTrackerEntry
-import com.example.habitstacks.recyclerview.HabitsOverviewAdapter
 import com.example.habitstacks.recyclerview.TrackQuestionsAdapter
-import com.example.habitstacks.viewmodel.NewTrackerViewModelFactory
 import com.example.habitstacks.viewmodel.TrackerOverviewViewModel
 import com.example.habitstacks.viewmodel.TrackerOverviewViewModelFactory
 

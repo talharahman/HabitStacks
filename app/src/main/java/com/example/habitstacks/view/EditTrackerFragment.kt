@@ -12,17 +12,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.habitstacks.databinding.NewEditTrackerQuestionsBinding
 import com.example.habitstacks.R
 import com.example.habitstacks.database.TrackerEntryDatabase
-import com.example.habitstacks.databinding.NewEditTrackerQuestionsBinding
+import com.example.habitstacks.model.HabitTrackerEntry
 import com.example.habitstacks.viewmodel.NewEditTrackerViewModel
 import com.example.habitstacks.viewmodel.NewEditTrackerViewModelFactory
 
-class NewTrackerFragment : Fragment() {
+class EditTrackerFragment : Fragment() {
 
     private lateinit var binding: NewEditTrackerQuestionsBinding
-    private lateinit var viewModelAdd: NewEditTrackerViewModel
-    private lateinit var associatedHabit: String
+    private lateinit var viewModelEdit: NewEditTrackerViewModel
+  //  private lateinit var associatedHabit: String
+    private lateinit var selectedTrack: HabitTrackerEntry
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -35,73 +37,76 @@ class NewTrackerFragment : Fragment() {
         return binding.root
     }
 
+
     private fun initBackend() {
         val dataSource = TrackerEntryDatabase
                 .getInstance(requireContext())
                 .trackerEntryDao
+     //   associatedHabit = EditHabitFragmentArgs.fromBundle(requireArguments()).selectedHabit.habitDescription
+        selectedTrack = EditTrackerFragmentArgs.fromBundle(requireArguments()).selectedTrack
 
-        associatedHabit = NewTrackerFragmentArgs.fromBundle(requireArguments()).associatedHabit
-        val viewModelFactory = NewEditTrackerViewModelFactory(dataSource, associatedHabit, null)
-        viewModelAdd = ViewModelProvider(this, viewModelFactory)
+        val viewModelFactory = NewEditTrackerViewModelFactory(dataSource, selectedTrack.associatedHabit, selectedTrack)
+        viewModelEdit = ViewModelProvider(this, viewModelFactory)
                 .get(NewEditTrackerViewModel::class.java)
 
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.newTrackerViewModel = viewModelEdit
 
-        binding.newTrackerViewModel = viewModelAdd
     }
 
-
     private fun initObservers() {
-        viewModelAdd.backButtonVisible.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.backButtonVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) binding.trackBackButton.visibility = View.VISIBLE
                 else binding.trackBackButton.visibility = View.GONE
             }
         })
 
-        viewModelAdd.cardViewLocationVisible.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.cardViewLocationVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
                     binding.layoutLocation.cardviewTrackLocation.visibility = View.VISIBLE
+                    binding.layoutLocation.editTrackLocation.hint = selectedTrack.trackLocation
                     binding.layoutLocation.editTrackLocation.addTextChangedListener { location: Editable? ->
-                        location?.let { viewModelAdd.onLocationInputChanged(location.toString()) }
+                        location?.let { viewModelEdit.onLocationInputChanged(location.toString()) }
                     }
                 } else binding.layoutLocation.cardviewTrackLocation.visibility = View.GONE
             }
         })
 
-        viewModelAdd.cardViewEmotionVisible.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.cardViewEmotionVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
                     binding.layoutEmotion.cardviewTrackEmotion.visibility = View.VISIBLE
+                    binding.layoutEmotion.editTrackEmotion.hint = selectedTrack.trackEmotion
                     binding.layoutEmotion.editTrackEmotion.addTextChangedListener { emotion: Editable? ->
-                        emotion?.let { viewModelAdd.onEmotionInputChanged(emotion.toString()) }
+                        emotion?.let { viewModelEdit.onEmotionInputChanged(emotion.toString()) }
                     }
                 } else binding.layoutEmotion.cardviewTrackEmotion.visibility = View.GONE
             }
         })
 
-        viewModelAdd.cardViewActionVisible.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.cardViewActionVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
                     binding.layoutAction.cardviewTrackAction.visibility = View.VISIBLE
+                    binding.layoutAction.editTrackAction.hint = selectedTrack.trackAction
                     binding.layoutAction.editTrackAction.addTextChangedListener { action: Editable? ->
-                        action?.let { viewModelAdd.onActionInputChanged(action.toString()) }
+                        action?.let { viewModelEdit.onActionInputChanged(action.toString()) }
                     }
                 } else binding.layoutAction.cardviewTrackAction.visibility = View.GONE
             }
         })
 
-        viewModelAdd.isInputReceived.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.isInputReceived.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
-                    requireView().findNavController().navigate(NewTrackerFragmentDirections
-                            .actionNewTackerToTrackerOverview(associatedHabit))
-                    Toast.makeText(requireContext(), "New Entry Added", Toast.LENGTH_SHORT).show()
+                    requireView().findNavController().navigate(EditTrackerFragmentDirections
+                            .actionEditTrackerFragmentToTrackQuestionsOverview(selectedTrack.associatedHabit))
+                    Toast.makeText(requireContext(), "Current Habit Updated", Toast.LENGTH_SHORT).show()
                 }
                 else Toast.makeText(requireContext(), "Must fill in requirements", Toast.LENGTH_SHORT).show()
             }
         })
     }
-
 }

@@ -19,13 +19,13 @@ import com.example.habitstacks.database.HabitDatabase
 import com.example.habitstacks.databinding.NewEditHabitBinding
 import com.example.habitstacks.model.Priority
 import com.example.habitstacks.model.Rating
-import com.example.habitstacks.viewmodel.NewHabitViewModel
+import com.example.habitstacks.viewmodel.NewEditHabitViewModel
 import com.example.habitstacks.viewmodel.NewHabitViewModelFactory
 
 class NewHabitFragment : Fragment() {
 
     private lateinit var binding: NewEditHabitBinding
-    private lateinit var viewModel: NewHabitViewModel
+    private lateinit var viewModelEdit: NewEditHabitViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -44,43 +44,43 @@ class NewHabitFragment : Fragment() {
                 .getInstance(requireContext())
                 .habitDao
         val viewModelFactory = NewHabitViewModelFactory(dataSource, null)
-        viewModel = ViewModelProvider(this, viewModelFactory)
-                .get(NewHabitViewModel::class.java)
+        viewModelEdit = ViewModelProvider(this, viewModelFactory)
+                .get(NewEditHabitViewModel::class.java)
 
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.newHabitViewModel = viewModel
+        binding.newHabitViewModel = viewModelEdit
     }
 
 
     private fun initObservers() {
-        viewModel.backButtonVisible.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.backButtonVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) binding.habitBackButton.visibility = View.VISIBLE
                 else binding.habitBackButton.visibility = View.GONE
             }
         })
 
-        viewModel.cardViewDescriptionVisible.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.cardViewDescriptionVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
                     binding.layoutDescription.cardviewHabitDescription.visibility = View.VISIBLE
                     binding.layoutDescription.editHabitDescription.addTextChangedListener { input: Editable? ->
-                        input?.let { viewModel.onDescriptionInputChanged(input.toString()) }
+                        input?.let { viewModelEdit.onDescriptionInputChanged(input.toString()) }
                     }
                 } else binding.layoutDescription.cardviewHabitDescription.visibility = View.GONE
             }
         })
 
-        viewModel.cardViewRatingVisible.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.cardViewRatingVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
                     binding.layoutRating.cardviewRating.visibility = View.VISIBLE
                     binding.layoutRating.ratingRadioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
                         rg?.let {
                             when (id) {
-                                rg[0].id -> viewModel.onRatingInputChanged(Rating.POSITIVE.name)
-                                rg[1].id -> viewModel.onRatingInputChanged(Rating.NEUTRAL.name)
-                                rg[2].id -> viewModel.onRatingInputChanged(Rating.NEGATIVE.name)
+                                rg[0].id -> viewModelEdit.onRatingInputChanged(Rating.POSITIVE.name)
+                                rg[1].id -> viewModelEdit.onRatingInputChanged(Rating.NEUTRAL.name)
+                                rg[2].id -> viewModelEdit.onRatingInputChanged(Rating.NEGATIVE.name)
                             }
                         }
                     }
@@ -88,16 +88,16 @@ class NewHabitFragment : Fragment() {
             }
         })
 
-        viewModel.cardViewPriorityVisible.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.cardViewPriorityVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
                     binding.layoutPriority.cardviewPriority.visibility = View.VISIBLE
                     binding.layoutPriority.priorityRadioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
                         rg?.let {
                             when (id) {
-                                rg[0].id -> viewModel.onPriorityInputChanged(Priority.LOW.name)
-                                rg[1].id -> viewModel.onPriorityInputChanged(Priority.MEDIUM.name)
-                                rg[2].id -> viewModel.onPriorityInputChanged(Priority.HIGH.name)
+                                rg[0].id -> viewModelEdit.onPriorityInputChanged(Priority.LOW.name)
+                                rg[1].id -> viewModelEdit.onPriorityInputChanged(Priority.MEDIUM.name)
+                                rg[2].id -> viewModelEdit.onPriorityInputChanged(Priority.HIGH.name)
                             }
                         }
                     }
@@ -105,7 +105,7 @@ class NewHabitFragment : Fragment() {
             }
         })
 
-        viewModel.isInputReceived.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.isInputReceived.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
                     requireView().findNavController().navigate(R.id.action_newHabit_to_dashBoard)

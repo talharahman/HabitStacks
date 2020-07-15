@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_tracker_overView_to_new_tracker"
             app:destination="@id/newTrackerFragment" />
+        <action
+            android:id="@+id/action_trackQuestionsOverview_to_editTrackerFragment"
+            app:destination="@id/editTrackerFragment" />
         <argument
             android:name="associatedHabit"
             app:argType="string" />
@@ -63,12 +66,24 @@
         android:label="EditHabitFragment"
         tools:layout="@layout/new_edit_habit">
         <argument
-                android:name="selectedHabit"
-                app:argType="com.example.habitstacks.model.Habit" />
+            android:name="selectedHabit"
+            app:argType="com.example.habitstacks.model.Habit" />
         <action
             android:id="@+id/action_editHabitFragment_to_dashBoard"
             app:destination="@id/dashBoard" />
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/editTrackerFragment"
+        android:name="com.example.habitstacks.view.EditTrackerFragment"
+        android:label="EditTrackerFragment" >
+        <argument
+            android:name="selectedTrack"
+            app:argType="com.example.habitstacks.model.HabitTrackerEntry" />
+        <action
+            android:id="@+id/action_editTrackerFragment_to_trackQuestionsOverview"
+            app:destination="@id/trackQuestionsOverview" />
     </fragment>
 
 </navigation>

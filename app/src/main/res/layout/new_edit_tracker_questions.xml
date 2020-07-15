@@ -5,7 +5,7 @@
     <data>
         <variable
             name="newTrackerViewModel"
-            type="com.example.habitstacks.viewmodel.NewTrackerViewModel" />
+            type="com.example.habitstacks.viewmodel.NewEditTrackerViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

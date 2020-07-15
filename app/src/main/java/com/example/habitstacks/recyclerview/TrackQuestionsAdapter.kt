@@ -2,11 +2,13 @@ package com.example.habitstacks.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.habitstacks.databinding.TrackQuestionsItemviewBinding
 import com.example.habitstacks.model.HabitTrackerEntry
+import com.example.habitstacks.view.TrackQuestionsOverviewDirections
 
 class TrackQuestionsAdapter : ListAdapter<HabitTrackerEntry, TrackQuestionsAdapter.ViewHolder>(TrackDiffCallback) {
 
@@ -27,7 +29,6 @@ class TrackQuestionsAdapter : ListAdapter<HabitTrackerEntry, TrackQuestionsAdapt
         override fun areContentsTheSame(oldItem: HabitTrackerEntry, newItem: HabitTrackerEntry): Boolean {
             return oldItem == newItem
         }
-
     }
 
 
@@ -36,6 +37,10 @@ class TrackQuestionsAdapter : ListAdapter<HabitTrackerEntry, TrackQuestionsAdapt
 
         fun bind(item: HabitTrackerEntry) {
             binding.habitTracker = item
+            binding.trackerEditButton.setOnClickListener {
+                it.findNavController().navigate(TrackQuestionsOverviewDirections
+                        .actionTrackQuestionsOverviewToEditTrackerFragment(item))
+            }
             binding.executePendingBindings()
         }
 

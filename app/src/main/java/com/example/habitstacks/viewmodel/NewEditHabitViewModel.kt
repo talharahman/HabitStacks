@@ -8,8 +8,8 @@ import com.example.habitstacks.database.HabitDao
 import com.example.habitstacks.model.Habit
 import kotlinx.coroutines.*
 
-class NewHabitViewModel(private val dataSource: HabitDao,
-                        private var selectedHabit: Habit?) : ViewModel() {
+class NewEditHabitViewModel(private val dataSource: HabitDao,
+                            private val selectedHabit: Habit?) : ViewModel() {
 
     private var newHabitCardPosition: NewEditHabitCards
     private val viewModelJob = Job()
@@ -77,6 +77,7 @@ class NewHabitViewModel(private val dataSource: HabitDao,
                 if (inputPriority.value != null) {
                     if (selectedHabit == null) newHabitSubmit()
                     else editHabitSubmit()
+
                     isInputReceived.value = true
                 } else isInputReceived.value = false
             }
@@ -105,11 +106,11 @@ class NewHabitViewModel(private val dataSource: HabitDao,
 
     private fun newHabitSubmit() {
         uiScope.launch {
-            selectedHabit = Habit(
+            val newHabit = Habit(
                     inputDescription.value!!,
                     inputRating.value!!,
                     inputPriority.value!!)
-            insert(selectedHabit!!)
+            insert(newHabit)
         }
     }
 
@@ -119,10 +120,12 @@ class NewHabitViewModel(private val dataSource: HabitDao,
 
     private fun editHabitSubmit() {
         uiScope.launch {
-            selectedHabit!!.habitDescription = inputDescription.value!!
-            selectedHabit!!.habitRating = inputRating.value!!
-            selectedHabit!!.habitPriority = inputPriority.value!!
-            update(selectedHabit!!)
+            selectedHabit?.let {
+                selectedHabit.habitDescription = inputDescription.value!!
+                selectedHabit.habitRating = inputRating.value!!
+                selectedHabit.habitPriority = inputPriority.value!!
+                update(selectedHabit)
+            }
         }
     }
 
@@ -142,8 +145,8 @@ class NewHabitViewModelFactory(private val dataSource: HabitDao,
                                private val associatedHabit: Habit?) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(NewHabitViewModel::class.java)) {
-            return NewHabitViewModel(dataSource, associatedHabit) as T
+        if (modelClass.isAssignableFrom(NewEditHabitViewModel::class.java)) {
+            return NewEditHabitViewModel(dataSource, associatedHabit) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
