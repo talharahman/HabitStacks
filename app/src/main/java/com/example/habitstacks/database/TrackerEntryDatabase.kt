@@ -9,7 +9,7 @@ import com.example.habitstacks.model.HabitTrackerEntry
 @Database(entities = [HabitTrackerEntry::class], version = 1, exportSchema = false)
 abstract class TrackerEntryDatabase : RoomDatabase() {
 
-    abstract val habitTrackerDao: HabitTrackerDao
+    abstract val trackerEntryDao: TrackerEntryDao
 
     companion object {
         @Volatile

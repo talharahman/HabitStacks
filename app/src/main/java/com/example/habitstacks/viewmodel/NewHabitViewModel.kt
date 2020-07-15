@@ -8,9 +8,8 @@ import com.example.habitstacks.database.HabitDao
 import com.example.habitstacks.model.Habit
 import kotlinx.coroutines.*
 
-class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
+class NewHabitViewModel(private val dataSource: HabitDao) : ViewModel() {
 
-    private val dataBase = dataSource
     private var habitCardPosition: NewHabitCards
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -112,7 +111,7 @@ class NewHabitViewModel(dataSource: HabitDao) : ViewModel() {
     }
 
     private suspend fun insert(habit: Habit) {
-        withContext(Dispatchers.IO) { dataBase.insert(habit) }
+        withContext(Dispatchers.IO) { dataSource.insert(habit) }
     }
 
     override fun onCleared() {

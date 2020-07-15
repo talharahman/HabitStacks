@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.example.habitstacks.model.HabitTrackerEntry
 
 @Dao
-interface HabitTrackerDao {
+interface TrackerEntryDao {
 
     @Insert
     fun insert(trackerEntryEntry: HabitTrackerEntry)
@@ -16,5 +16,5 @@ interface HabitTrackerDao {
     fun get(key: Long): HabitTrackerEntry
 
     @Query("SELECT * from habit_tracker_table WHERE associated_habit = :key")
-    fun getEntriesForHabit(key: Long): LiveData<List<HabitTrackerEntry>>
+    fun getEntriesForHabit(key: String): List<HabitTrackerEntry>
 }

@@ -2,11 +2,13 @@ package com.example.habitstacks.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.habitstacks.databinding.HabitItemviewBinding
 import com.example.habitstacks.model.Habit
+import com.example.habitstacks.view.HabitDashboardDirections
 
 class HabitsOverviewAdapter : ListAdapter<Habit,
         HabitsOverviewAdapter.ViewHolder>(HabitDiffCallback) {
@@ -35,6 +37,10 @@ class HabitsOverviewAdapter : ListAdapter<Habit,
 
         fun bind(item: Habit) {
             binding.habit = item
+            binding.trackButton.setOnClickListener {
+                it.findNavController().navigate(HabitDashboardDirections
+                        .actionDashBoardToTrackQuestionsOverview(item.habitDescription))
+            }
             binding.executePendingBindings()
         }
 

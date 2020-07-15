@@ -7,10 +7,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "habit_tracker_table")
 data class HabitTrackerEntry(
         @ColumnInfo(name = "associated_habit")
-        val associatedHabit: Long,
+        val associatedHabit: String,
 
         @ColumnInfo(name = "current_time")
-        val currentTime: Long = System.currentTimeMillis(),
+        val currentTime: Long,
 
         @ColumnInfo(name = "track_location")
         var trackLocation: String,

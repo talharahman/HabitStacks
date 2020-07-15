@@ -1,6 +1,7 @@
 package com.example.habitstacks.database
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -23,7 +24,7 @@ interface HabitDao {
     fun clear()
 
     @Query("SELECT * from habits_table ORDER BY habitId DESC")
-    fun getAllHabits(): LiveData<List<Habit>>
+    fun getAllHabits(): List<Habit>
 
     @Query("SELECT * from habits_table WHERE habitId = :key")
     fun getHabitWithId(key: Long): LiveData<Habit>

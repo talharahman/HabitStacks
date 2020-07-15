@@ -54,6 +54,7 @@ class HabitDashboard : Fragment() {
 
     private fun initViews() {
         binding.newHabitButton.setOnClickListener { view: View ->
+
             view.findNavController().navigate(R.id.action_dashBoard_to_addNewHabit)
         }
 
@@ -69,15 +70,6 @@ class HabitDashboard : Fragment() {
             list?.let { adapter.submitList(list) }
         })
 
-        dashBoardViewModel.habits.observe(viewLifecycleOwner, Observer { list: List<Habit>? ->
-            list?.let { adapter.submitList(list) }
-        })
-
-        dashBoardViewModel.onTrackButtonClicked.observe(viewLifecycleOwner, Observer {
-            findNavController().navigate(HabitDashboardDirections
-                    .actionDashBoardToTrackQuestionsOverview(dashBoardViewModel.selectedHabit.value!!))
-            dashBoardViewModel.selectedHabitComplete()
-        })
     }
 
 

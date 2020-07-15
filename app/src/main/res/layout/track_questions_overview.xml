@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="trackQuestionViewModel"
-            type="com.example.habitstacks.viewmodel.NewTrackerViewModel" />
+            name="trackerOverviewViewModel"
+            type="com.example.habitstacks.viewmodel.TrackerOverviewViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,6 +20,7 @@
             android:layout_marginTop="40dp"
             android:textSize="36sp"
             tools:text="My Current Habit"
+            android:text="@{trackerOverviewViewModel.selectedHabit}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>

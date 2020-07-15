@@ -22,7 +22,7 @@
         android:id="@+id/newHabit"
         android:name="com.example.habitstacks.view.NewHabitFragment"
         android:label="new_habit"
-        tools:layout="@layout/new_habit" >
+        tools:layout="@layout/new_habit">
         <action
             android:id="@+id/action_newHabit_to_dashBoard"
             app:destination="@id/dashBoard" />
@@ -33,11 +33,25 @@
         android:name="com.example.habitstacks.view.TrackQuestionsOverview"
         android:label="track_questions_overview"
         tools:layout="@layout/track_questions_overview">
+        <action
+            android:id="@+id/action_tracker_overView_to_new_tracker"
+            app:destination="@id/newTrackerFragment" />
         <argument
             android:name="associatedHabit"
-            app:argType="String"/>
+            app:argType="string" />
     </fragment>
 
-
+    <fragment
+        android:id="@+id/newTrackerFragment"
+        android:name="com.example.habitstacks.view.NewTrackerFragment"
+        android:label="NewTrackerFragment"
+        tools:layout="@layout/new_tracker_questions">
+        <action
+            android:id="@+id/action_new_tacker_to_tracker_overview"
+            app:destination="@id/trackQuestionsOverview" />
+        <argument
+            android:name="associatedHabit"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

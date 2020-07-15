@@ -18,6 +18,7 @@
             android:id="@+id/current_date_time"
             style="@style/TextStyle"
             android:layout_marginTop="20dp"
+            app:trackerEntryTime="@{habitTracker}"
             tools:text="Monday, July 13, 12:43PM" />
 
         <ScrollView

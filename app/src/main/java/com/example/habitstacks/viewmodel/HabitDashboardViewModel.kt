@@ -1,44 +1,39 @@
 package com.example.habitstacks.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.habitstacks.database.HabitDao
 import com.example.habitstacks.model.Habit
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 
-class HabitDashboardViewModel(dataSource: HabitDao) : ViewModel() {
+class HabitDashboardViewModel(private val dataSource: HabitDao) : ViewModel() {
 
-    private val dataBase = dataSource
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val _selectedHabit = MutableLiveData<String>()
     val selectedHabit: LiveData<String> get() = _selectedHabit
 
-    private val _onTrackButtonClicked = MutableLiveData<Boolean>()
-    val onTrackButtonClicked: LiveData<Boolean> get() = _onTrackButtonClicked
+    private var _habits = MutableLiveData<List<Habit>>()
+    val habits: LiveData<List<Habit>> get() = _habits
 
-    private val _onGoalButtonClicked = MutableLiveData<Boolean>()
-    val onGoalButtonClicked: LiveData<Boolean> get() = _onGoalButtonClicked
-
-    val habits = dataBase.getAllHabits()
-
-    fun navigateToTrackerEntries(item: Habit) {
-        _onTrackButtonClicked.value = true
-        _selectedHabit.value = item.habitDescription
+    init {
+        getHabitsFromDatabase()
     }
 
-    fun navigateToHabitGoals(item: Habit) {
-        _onGoalButtonClicked.value = true
-        _selectedHabit.value = item.habitDescription
+    private fun getHabitsFromDatabase() {
+        uiScope.launch {
+            _habits.value = getAllHabits()
+        }
     }
 
-    fun selectedHabitComplete() {
-        _selectedHabit.value = null
+    private suspend fun getAllHabits(): List<Habit> {
+        return withContext(Dispatchers.IO) {
+            return@withContext dataSource.getAllHabits()
+        }
     }
 
     override fun onCleared() {

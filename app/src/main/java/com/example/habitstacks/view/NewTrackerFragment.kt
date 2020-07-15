@@ -12,21 +12,22 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.example.habitstacks.databinding.NewTrackQuestionsBinding
 import com.example.habitstacks.R
 import com.example.habitstacks.database.TrackerEntryDatabase
+import com.example.habitstacks.databinding.NewTrackerQuestionsBinding
 import com.example.habitstacks.viewmodel.NewTrackerViewModel
 import com.example.habitstacks.viewmodel.NewTrackerViewModelFactory
 
 class NewTrackerFragment : Fragment() {
 
-    private lateinit var binding: NewTrackQuestionsBinding
+    private lateinit var binding: NewTrackerQuestionsBinding
     private lateinit var viewModel: NewTrackerViewModel
+    private lateinit var associatedHabit: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = DataBindingUtil.inflate(
-                inflater, R.layout.new_track_questions, container,false)
+                inflater, R.layout.new_tracker_questions, container, false)
 
         initBackend()
         initObservers()
@@ -37,14 +38,16 @@ class NewTrackerFragment : Fragment() {
     private fun initBackend() {
         val dataSource = TrackerEntryDatabase
                 .getInstance(requireContext())
-                .habitTrackerDao
-        val viewModelFactory = NewTrackerViewModelFactory(dataSource)
+                .trackerEntryDao
+
+        associatedHabit = NewTrackerFragmentArgs.fromBundle(requireArguments()).associatedHabit
+        val viewModelFactory = NewTrackerViewModelFactory(dataSource, associatedHabit)
         viewModel = ViewModelProvider(this, viewModelFactory)
                 .get(NewTrackerViewModel::class.java)
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.trackQuestionViewModel = viewModel
+        binding.newTrackerViewModel = viewModel
     }
 
 
@@ -91,8 +94,9 @@ class NewTrackerFragment : Fragment() {
 
         viewModel.isInputReceived.observe(viewLifecycleOwner, Observer {
             it?.let {
-           //     if (it) requireView().findNavController().navigate()
-           //     else Toast.makeText(requireContext(), "Must fill in requirements", Toast.LENGTH_SHORT).show()
+                if (it) requireView().findNavController().navigate(NewTrackerFragmentDirections
+                        .actionNewTackerToTrackerOverview(associatedHabit))
+                else Toast.makeText(requireContext(), "Must fill in requirements", Toast.LENGTH_SHORT).show()
             }
         })
     }

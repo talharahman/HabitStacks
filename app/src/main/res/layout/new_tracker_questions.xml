@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
-            name="trackQuestionViewModel"
+            name="newTrackerViewModel"
             type="com.example.habitstacks.viewmodel.NewTrackerViewModel" />
     </data>
 
@@ -19,6 +18,8 @@
             style="@style/ButtonStyle"
             android:layout_marginBottom="92dp"
             android:text="@string/back_text"
+            android:enabled="@{newTrackerViewModel.backButtonVisible}"
+            android:onClick="@{() -> newTrackerViewModel.navigateToPreviousView()}"
             app:layout_constraintBottom_toBottomOf="@id/track_submit_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -29,6 +30,7 @@
             style="@style/ButtonStyle"
             android:layout_marginBottom="24dp"
             android:text="@string/submit_text"
+            android:onClick="@{() -> newTrackerViewModel.navigateToNextView()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0" />

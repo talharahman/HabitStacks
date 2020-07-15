@@ -26,4 +26,5 @@
     <string name="track_location_description">where are you right now ?</string>
     <string name="track_emotion_description">how are you feeling right now ?</string>
     <string name="track_action_description">what action did you do before and/or will do after ?</string>
+    <string name="settings_text">Settings</string>
 </resources>
