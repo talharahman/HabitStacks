@@ -41,6 +41,10 @@ class HabitsOverviewAdapter : ListAdapter<Habit,
                 it.findNavController().navigate(HabitDashboardDirections
                         .actionDashBoardToTrackQuestionsOverview(item.habitDescription))
             }
+            binding.editHabitButton.setOnClickListener {
+                it.findNavController().navigate(HabitDashboardDirections
+                        .actionDashBoardToEditHabitFragment(item))
+            }
             binding.executePendingBindings()
         }
 

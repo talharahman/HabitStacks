@@ -8,9 +8,10 @@ import com.example.habitstacks.database.HabitDao
 import com.example.habitstacks.model.Habit
 import kotlinx.coroutines.*
 
-class NewHabitViewModel(private val dataSource: HabitDao) : ViewModel() {
+class NewHabitViewModel(private val dataSource: HabitDao,
+                        private var selectedHabit: Habit?) : ViewModel() {
 
-    private var habitCardPosition: NewHabitCards
+    private var newHabitCardPosition: NewEditHabitCards
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
@@ -37,7 +38,7 @@ class NewHabitViewModel(private val dataSource: HabitDao) : ViewModel() {
         _cardViewDescriptionVisible.value = true
         _cardViewRatingVisible.value = false
         _cardViewPriorityVisible.value = false
-        habitCardPosition = NewHabitCards.DESCRIPTION
+        newHabitCardPosition = NewEditHabitCards.DESCRIPTION
         isInputReceived.value = null
     }
 
@@ -56,45 +57,47 @@ class NewHabitViewModel(private val dataSource: HabitDao) : ViewModel() {
 
 
     fun navigateToNextView() {
-        when (habitCardPosition.name) {
+        when (newHabitCardPosition.name) {
             "DESCRIPTION" -> {
                 if (inputDescription.value != null) {
                     _cardViewDescriptionVisible.value = false
                     _cardViewRatingVisible.value = true
                     _backButtonVisible.value = true
-                    habitCardPosition = NewHabitCards.RATING
+                    newHabitCardPosition = NewEditHabitCards.RATING
                 } else isInputReceived.value = false
             }
             "RATING" -> {
                 if (inputRating.value != null) {
                     _cardViewRatingVisible.value = false
                     _cardViewPriorityVisible.value = true
-                    habitCardPosition = NewHabitCards.PRIORITY
+                    newHabitCardPosition = NewEditHabitCards.PRIORITY
                 } else isInputReceived.value = false
             }
             "PRIORITY" -> {
                 if (inputPriority.value != null) {
-                    newHabitSubmit()
+                    if (selectedHabit == null) newHabitSubmit()
+                    else editHabitSubmit()
                     isInputReceived.value = true
                 } else isInputReceived.value = false
             }
         }
     }
 
+
     fun navigateToPreviousView() {
-        when (habitCardPosition.name) {
+        when (newHabitCardPosition.name) {
             "DESCRIPTION" -> {
                 _backButtonVisible.value = false
             }
             "RATING" -> {
                 _cardViewRatingVisible.value = false
                 _cardViewDescriptionVisible.value = true
-                habitCardPosition = NewHabitCards.DESCRIPTION
+                newHabitCardPosition = NewEditHabitCards.DESCRIPTION
             }
             "PRIORITY" -> {
                 _cardViewPriorityVisible.value = false
                 _cardViewRatingVisible.value = true
-                habitCardPosition = NewHabitCards.RATING
+                newHabitCardPosition = NewEditHabitCards.RATING
             }
         }
     }
@@ -102,16 +105,29 @@ class NewHabitViewModel(private val dataSource: HabitDao) : ViewModel() {
 
     private fun newHabitSubmit() {
         uiScope.launch {
-            val newHabit = Habit(
+            selectedHabit = Habit(
                     inputDescription.value!!,
                     inputRating.value!!,
                     inputPriority.value!!)
-            insert(newHabit)
+            insert(selectedHabit!!)
         }
     }
 
     private suspend fun insert(habit: Habit) {
         withContext(Dispatchers.IO) { dataSource.insert(habit) }
+    }
+
+    private fun editHabitSubmit() {
+        uiScope.launch {
+            selectedHabit!!.habitDescription = inputDescription.value!!
+            selectedHabit!!.habitRating = inputRating.value!!
+            selectedHabit!!.habitPriority = inputPriority.value!!
+            update(selectedHabit!!)
+        }
+    }
+
+    private suspend fun update(habit: Habit) {
+        withContext(Dispatchers.IO) { dataSource.update(habit) }
     }
 
     override fun onCleared() {
@@ -122,15 +138,15 @@ class NewHabitViewModel(private val dataSource: HabitDao) : ViewModel() {
 
 
 @Suppress("UNCHECKED_CAST")
-class NewHabitViewModelFactory(
-        private val dataSource: HabitDao) : ViewModelProvider.Factory {
+class NewHabitViewModelFactory(private val dataSource: HabitDao,
+                               private val associatedHabit: Habit?) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(NewHabitViewModel::class.java)) {
-            return NewHabitViewModel(dataSource) as T
+            return NewHabitViewModel(dataSource, associatedHabit) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
 
-enum class NewHabitCards { DESCRIPTION, RATING, PRIORITY }
+enum class NewEditHabitCards { DESCRIPTION, RATING, PRIORITY }

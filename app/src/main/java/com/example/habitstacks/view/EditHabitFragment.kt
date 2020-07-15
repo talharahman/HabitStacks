@@ -14,24 +14,24 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.habitstacks.databinding.NewEditHabitBinding
 import com.example.habitstacks.R
 import com.example.habitstacks.database.HabitDatabase
-import com.example.habitstacks.databinding.NewEditHabitBinding
+import com.example.habitstacks.model.Habit
 import com.example.habitstacks.model.Priority
 import com.example.habitstacks.model.Rating
 import com.example.habitstacks.viewmodel.NewHabitViewModel
 import com.example.habitstacks.viewmodel.NewHabitViewModelFactory
 
-class NewHabitFragment : Fragment() {
+class EditHabitFragment : Fragment() {
 
     private lateinit var binding: NewEditHabitBinding
     private lateinit var viewModel: NewHabitViewModel
+    private lateinit var selectedHabit: Habit
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = DataBindingUtil.inflate(
-                inflater, R.layout.new_edit_habit, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.new_edit_habit, container, false)
 
         initBackend()
         initObservers()
@@ -43,7 +43,8 @@ class NewHabitFragment : Fragment() {
         val dataSource = HabitDatabase
                 .getInstance(requireContext())
                 .habitDao
-        val viewModelFactory = NewHabitViewModelFactory(dataSource, null)
+        selectedHabit = EditHabitFragmentArgs.fromBundle(requireArguments()).selectedHabit
+        val viewModelFactory = NewHabitViewModelFactory(dataSource, selectedHabit)
         viewModel = ViewModelProvider(this, viewModelFactory)
                 .get(NewHabitViewModel::class.java)
 
@@ -64,6 +65,7 @@ class NewHabitFragment : Fragment() {
             it?.let {
                 if (it) {
                     binding.layoutDescription.cardviewHabitDescription.visibility = View.VISIBLE
+                    binding.layoutDescription.editHabitDescription.hint = selectedHabit.habitDescription
                     binding.layoutDescription.editHabitDescription.addTextChangedListener { input: Editable? ->
                         input?.let { viewModel.onDescriptionInputChanged(input.toString()) }
                     }
@@ -75,7 +77,15 @@ class NewHabitFragment : Fragment() {
             it?.let {
                 if (it) {
                     binding.layoutRating.cardviewRating.visibility = View.VISIBLE
-                    binding.layoutRating.ratingRadioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
+                    val radioGroup = binding.layoutRating.ratingRadioGroup
+
+                    when (selectedHabit.habitRating) {
+                        Rating.POSITIVE.name -> radioGroup.check(R.id.positive_button)
+                        Rating.NEUTRAL.name -> radioGroup.check(R.id.neutral_button)
+                        Rating.NEGATIVE.name -> radioGroup.check(R.id.negative_button)
+                    }
+
+                    radioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
                         rg?.let {
                             when (id) {
                                 rg[0].id -> viewModel.onRatingInputChanged(Rating.POSITIVE.name)
@@ -92,7 +102,15 @@ class NewHabitFragment : Fragment() {
             it?.let {
                 if (it) {
                     binding.layoutPriority.cardviewPriority.visibility = View.VISIBLE
-                    binding.layoutPriority.priorityRadioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
+                    val radioGroup = binding.layoutPriority.priorityRadioGroup
+
+                    when (selectedHabit.habitPriority) {
+                        Priority.LOW.name -> radioGroup.check(R.id.low_priority_button)
+                        Priority.MEDIUM.name -> radioGroup.check(R.id.med_priority_button)
+                        Priority.HIGH.name -> radioGroup.check(R.id.high_priority_button)
+                    }
+
+                    radioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
                         rg?.let {
                             when (id) {
                                 rg[0].id -> viewModel.onPriorityInputChanged(Priority.LOW.name)
@@ -108,11 +126,12 @@ class NewHabitFragment : Fragment() {
         viewModel.isInputReceived.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
-                    requireView().findNavController().navigate(R.id.action_newHabit_to_dashBoard)
-                    Toast.makeText(requireContext(), "New Habit Added", Toast.LENGTH_SHORT).show()
+                    requireView().findNavController().navigate(R.id.action_editHabitFragment_to_dashBoard)
+                    Toast.makeText(requireContext(), "Current Habit Changed", Toast.LENGTH_SHORT).show()
                 }
                 else Toast.makeText(requireContext(), "Must fill in requirements", Toast.LENGTH_SHORT).show()
             }
         })
     }
+
 }

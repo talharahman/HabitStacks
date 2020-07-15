@@ -48,14 +48,14 @@ class TrackQuestionsOverview : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)
                 .get(TrackerOverviewViewModel::class.java)
 
-        adapter = TrackQuestionsAdapter()
-
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.trackerOverviewViewModel = viewModel
     }
 
     private fun initViews() {
+        adapter = TrackQuestionsAdapter()
+
         binding.newTrackButton.setOnClickListener { view: View ->
             view.findNavController().navigate(TrackQuestionsOverviewDirections
                     .actionTrackerOverViewToNewTracker(selectedHabit))

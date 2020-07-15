@@ -1,7 +1,11 @@
 package com.example.habitstacks.model
 
+import android.os.Parcelable
 import androidx.room.*
+import kotlinx.android.parcel.IgnoredOnParcel
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "habits_table")
 data class Habit(
         @ColumnInfo(name = "habit_description")
@@ -11,8 +15,9 @@ data class Habit(
         var habitRating: String,
 
         @ColumnInfo(name = "habit_priority")
-        var habitPriority: String) {
+        var habitPriority: String) : Parcelable {
 
+    @IgnoredOnParcel
     @PrimaryKey(autoGenerate = true)
     var habitId: Long = 0L
 }

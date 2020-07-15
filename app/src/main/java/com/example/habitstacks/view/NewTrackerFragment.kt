@@ -14,20 +14,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.habitstacks.R
 import com.example.habitstacks.database.TrackerEntryDatabase
-import com.example.habitstacks.databinding.NewTrackerQuestionsBinding
+import com.example.habitstacks.databinding.NewEditTrackerQuestionsBinding
 import com.example.habitstacks.viewmodel.NewTrackerViewModel
 import com.example.habitstacks.viewmodel.NewTrackerViewModelFactory
 
 class NewTrackerFragment : Fragment() {
 
-    private lateinit var binding: NewTrackerQuestionsBinding
+    private lateinit var binding: NewEditTrackerQuestionsBinding
     private lateinit var viewModel: NewTrackerViewModel
     private lateinit var associatedHabit: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = DataBindingUtil.inflate(
-                inflater, R.layout.new_tracker_questions, container, false)
+                inflater, R.layout.new_edit_tracker_questions, container, false)
 
         initBackend()
         initObservers()

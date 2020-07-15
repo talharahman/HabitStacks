@@ -16,13 +16,16 @@
         <action
             android:id="@+id/action_dashBoard_to_trackQuestionsOverview"
             app:destination="@id/trackQuestionsOverview" />
+        <action
+            android:id="@+id/action_dashBoard_to_editHabitFragment"
+            app:destination="@id/editHabitFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/newHabit"
         android:name="com.example.habitstacks.view.NewHabitFragment"
         android:label="new_habit"
-        tools:layout="@layout/new_habit">
+        tools:layout="@layout/new_edit_habit">
         <action
             android:id="@+id/action_newHabit_to_dashBoard"
             app:destination="@id/dashBoard" />
@@ -45,13 +48,27 @@
         android:id="@+id/newTrackerFragment"
         android:name="com.example.habitstacks.view.NewTrackerFragment"
         android:label="NewTrackerFragment"
-        tools:layout="@layout/new_tracker_questions">
+        tools:layout="@layout/new_edit_tracker_questions">
         <action
             android:id="@+id/action_new_tacker_to_tracker_overview"
             app:destination="@id/trackQuestionsOverview" />
         <argument
             android:name="associatedHabit"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editHabitFragment"
+        android:name="com.example.habitstacks.view.EditHabitFragment"
+        android:label="EditHabitFragment"
+        tools:layout="@layout/new_edit_habit">
+        <argument
+                android:name="selectedHabit"
+                app:argType="com.example.habitstacks.model.Habit" />
+        <action
+            android:id="@+id/action_editHabitFragment_to_dashBoard"
+            app:destination="@id/dashBoard" />
+
     </fragment>
 
 </navigation>

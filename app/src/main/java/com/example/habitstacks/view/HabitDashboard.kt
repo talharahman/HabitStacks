@@ -45,14 +45,14 @@ class HabitDashboard : Fragment() {
         dashBoardViewModel = ViewModelProvider(this, viewModelFactory)
                 .get(HabitDashboardViewModel::class.java)
 
-        adapter = HabitsOverviewAdapter()
-
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.habitDashboardViewModel = dashBoardViewModel
     }
 
     private fun initViews() {
+        adapter = HabitsOverviewAdapter()
+
         binding.newHabitButton.setOnClickListener { view: View ->
 
             view.findNavController().navigate(R.id.action_dashBoard_to_addNewHabit)
