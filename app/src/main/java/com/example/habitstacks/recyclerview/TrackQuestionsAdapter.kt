@@ -10,15 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.habitstacks.databinding.TrackQuestionsItemviewBinding
 import com.example.habitstacks.model.HabitTrackerEntry
 import com.example.habitstacks.view.TrackQuestionsOverviewDirections
+import com.example.habitstacks.viewmodel.OnEntryDeletionListener
 
-class TrackQuestionsAdapter : ListAdapter<HabitTrackerEntry, TrackQuestionsAdapter.ViewHolder>(TrackDiffCallback) {
+class TrackQuestionsAdapter(private val listener: OnEntryDeletionListener) : ListAdapter<HabitTrackerEntry, TrackQuestionsAdapter.ViewHolder>(TrackDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position)!!)
+        holder.bind(getItem(position)!!, listener)
     }
 
     companion object TrackDiffCallback : DiffUtil.ItemCallback<HabitTrackerEntry>() {
@@ -33,10 +34,11 @@ class TrackQuestionsAdapter : ListAdapter<HabitTrackerEntry, TrackQuestionsAdapt
     }
 
 
-    class ViewHolder(private var binding: TrackQuestionsItemviewBinding
+    class ViewHolder(private val binding: TrackQuestionsItemviewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: HabitTrackerEntry) {
+
+        fun bind(item: HabitTrackerEntry, listener: OnEntryDeletionListener) {
             binding.habitTracker = item
             binding.trackerEditButton.setOnClickListener {
                 it.findNavController().navigate(TrackQuestionsOverviewDirections
@@ -46,6 +48,11 @@ class TrackQuestionsAdapter : ListAdapter<HabitTrackerEntry, TrackQuestionsAdapt
                 binding.trackerOverviewCardview.visibility = View.GONE
                 binding.layoutTrackDeletion.cardviewTrackDeletion.visibility = View.VISIBLE
                 binding.layoutTrackDeletion.deleteNoConfirm.setOnClickListener {
+                    binding.layoutTrackDeletion.cardviewTrackDeletion.visibility = View.GONE
+                    binding.trackerOverviewCardview.visibility = View.VISIBLE
+                }
+                binding.layoutTrackDeletion.deleteYesConfirm.setOnClickListener {
+                    listener.onEntryDeleted(item)
                     binding.layoutTrackDeletion.cardviewTrackDeletion.visibility = View.GONE
                     binding.trackerOverviewCardview.visibility = View.VISIBLE
                 }

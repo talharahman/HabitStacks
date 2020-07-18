@@ -9,7 +9,7 @@ import com.example.habitstacks.database.TrackerEntryDao
 import com.example.habitstacks.model.HabitTrackerEntry
 import kotlinx.coroutines.*
 
-class TrackerOverviewViewModel(dataSource: TrackerEntryDao, habitDescription: String) : ViewModel() {
+class TrackerOverviewViewModel(dataSource: TrackerEntryDao, habitDescription: String) : ViewModel(){
 
     private val dataBase = dataSource
     private var viewModelJob = Job()
@@ -39,13 +39,23 @@ class TrackerOverviewViewModel(dataSource: TrackerEntryDao, habitDescription: St
     }
 
     fun deleteSelectedEntry(trackerEntry: HabitTrackerEntry) {
-        Log.d("trackerOverview", "button clicked!")
+        uiScope.launch {
+            deleteEntryFromDatabase(trackerEntry)
+        }
+    }
+
+    private suspend fun deleteEntryFromDatabase(trackerEntry: HabitTrackerEntry) {
+        withContext(Dispatchers.IO) {
+            dataBase.delete(trackerEntry.trackId)
+        }
+        getTrackerEntriesFromDatabase()
     }
 
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
     }
+
 
 }
 
@@ -60,4 +70,9 @@ class TrackerOverviewViewModelFactory(
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
+}
+
+interface OnEntryDeletionListener {
+
+    fun onEntryDeleted(trackerEntry: HabitTrackerEntry)
 }

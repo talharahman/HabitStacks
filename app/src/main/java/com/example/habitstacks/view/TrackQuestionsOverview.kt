@@ -15,6 +15,7 @@ import com.example.habitstacks.R
 import com.example.habitstacks.database.TrackerEntryDatabase
 import com.example.habitstacks.model.HabitTrackerEntry
 import com.example.habitstacks.recyclerview.TrackQuestionsAdapter
+import com.example.habitstacks.viewmodel.OnEntryDeletionListener
 import com.example.habitstacks.viewmodel.TrackerOverviewViewModel
 import com.example.habitstacks.viewmodel.TrackerOverviewViewModelFactory
 
@@ -52,7 +53,11 @@ class TrackQuestionsOverview : Fragment() {
     }
 
     private fun initViews() {
-        adapter = TrackQuestionsAdapter()
+        adapter = TrackQuestionsAdapter(object : OnEntryDeletionListener {
+            override fun onEntryDeleted(trackerEntry: HabitTrackerEntry) {
+                viewModel.deleteSelectedEntry(trackerEntry)
+            }
+        })
 
         binding.newTrackButton.setOnClickListener { view: View ->
             view.findNavController().navigate(TrackQuestionsOverviewDirections

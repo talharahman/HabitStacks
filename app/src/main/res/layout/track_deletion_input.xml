@@ -3,15 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="habitTracker"
-            type="com.example.habitstacks.model.HabitTrackerEntry" />
+<!--    <data>-->
+<!--        <variable-->
+<!--            name="habitTracker"-->
+<!--            type="com.example.habitstacks.model.HabitTrackerEntry" />-->
 
-        <variable
-            name="trackerOverviewViewModel"
-            type="com.example.habitstacks.viewmodel.TrackerOverviewViewModel" />
-    </data>
+<!--        <variable-->
+<!--            name="trackerOverviewViewModel"-->
+<!--            type="com.example.habitstacks.viewmodel.TrackerOverviewViewModel" />-->
+<!--    </data>-->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_track_deletion"
