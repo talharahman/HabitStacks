@@ -1,5 +1,6 @@
 package com.example.habitstacks.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -35,6 +36,10 @@ class TrackerOverviewViewModel(dataSource: TrackerEntryDao, habitDescription: St
         return withContext(Dispatchers.IO) {
             return@withContext dataBase.getEntriesForHabit(selectedHabit.value!!)
         }
+    }
+
+    fun deleteSelectedEntry(trackerEntry: HabitTrackerEntry) {
+        Log.d("trackerOverview", "button clicked!")
     }
 
     override fun onCleared() {

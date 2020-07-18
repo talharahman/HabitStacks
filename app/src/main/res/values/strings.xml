@@ -27,4 +27,7 @@
     <string name="track_emotion_description">how are you feeling right now ?</string>
     <string name="track_action_description">what action did you do before and/or will do after ?</string>
     <string name="settings_text">Settings</string>
+    <string name="delete_text">DELETE</string>
+    <string name="cancel_text">CANCEL</string>
+    <string name="delete_confirmation_text">do you want to delete this entry ?</string>
 </resources>

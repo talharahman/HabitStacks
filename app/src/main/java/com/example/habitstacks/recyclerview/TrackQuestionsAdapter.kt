@@ -1,6 +1,7 @@
 package com.example.habitstacks.recyclerview
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
@@ -40,6 +41,14 @@ class TrackQuestionsAdapter : ListAdapter<HabitTrackerEntry, TrackQuestionsAdapt
             binding.trackerEditButton.setOnClickListener {
                 it.findNavController().navigate(TrackQuestionsOverviewDirections
                         .actionTrackQuestionsOverviewToEditTrackerFragment(item))
+            }
+            binding.trackerDeleteButton.setOnClickListener {
+                binding.trackerOverviewCardview.visibility = View.GONE
+                binding.layoutTrackDeletion.cardviewTrackDeletion.visibility = View.VISIBLE
+                binding.layoutTrackDeletion.deleteNoConfirm.setOnClickListener {
+                    binding.layoutTrackDeletion.cardviewTrackDeletion.visibility = View.GONE
+                    binding.trackerOverviewCardview.visibility = View.VISIBLE
+                }
             }
             binding.executePendingBindings()
         }
