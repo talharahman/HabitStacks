@@ -15,7 +15,6 @@ import com.example.habitstacks.R
 import com.example.habitstacks.database.TrackerEntryDatabase
 import com.example.habitstacks.model.HabitTrackerEntry
 import com.example.habitstacks.recyclerview.TrackQuestionsAdapter
-import com.example.habitstacks.viewmodel.OnEntryDeletionListener
 import com.example.habitstacks.viewmodel.TrackerOverviewViewModel
 import com.example.habitstacks.viewmodel.TrackerOverviewViewModelFactory
 
@@ -76,4 +75,8 @@ class TrackQuestionsOverview : Fragment() {
         })
 
     }
+}
+
+interface OnEntryDeletionListener {
+    fun onEntryDeleted(trackerEntry: HabitTrackerEntry)
 }

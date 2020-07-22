@@ -20,6 +20,9 @@ interface HabitDao {
     @Query("SELECT * from habits_table WHERE habitId = :key")
     fun get(key: Long): Habit
 
+    @Query("DELETE from habits_table WHERE habitId = :key")
+    fun delete(key: Long)
+
     @Query("SELECT * from habits_table ORDER BY habitId")
     fun getAllHabits(): List<Habit>
 

@@ -19,6 +19,9 @@ interface TrackerEntryDao {
     @Query("DELETE from habit_tracker_table WHERE trackId = :key")
     fun delete(key: Long)
 
+    @Query("DELETE from habit_tracker_table WHERE associated_habit = :habit")
+    fun deleteLinkedEntries(habit: String)
+
     @Query("SELECT * from habit_tracker_table WHERE associated_habit = :key ORDER BY trackId ")
     fun getEntriesForHabit(key: String): List<HabitTrackerEntry>
 }

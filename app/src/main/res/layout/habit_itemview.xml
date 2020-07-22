@@ -5,13 +5,14 @@
 
     <data>
         <variable
-            name="dashBoardViewModel"
-            type="com.example.habitstacks.viewmodel.HabitDashboardViewModel" />
-
-        <variable
             name="habit"
             type="com.example.habitstacks.model.Habit" />
     </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/habit_overview_cardview"
@@ -114,5 +115,13 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
+
+        <include
+            android:id="@+id/layout_habit_deletion"
+            layout="@layout/habit_deletion_input"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
 </layout>

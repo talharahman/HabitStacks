@@ -1,6 +1,7 @@
 package com.example.habitstacks.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,10 +38,11 @@ class HabitDashboard : Fragment() {
     }
 
     private fun initBackend() {
+        val application = requireNotNull(this.activity).application
         val dataSource = HabitDatabase
-                .getInstance(requireContext())
+                .getInstance(application)
                 .habitDao
-        val viewModelFactory = DashBoardViewModelFactory(dataSource)
+        val viewModelFactory = DashBoardViewModelFactory(dataSource, application)
         dashBoardViewModel = ViewModelProvider(this, viewModelFactory)
                 .get(HabitDashboardViewModel::class.java)
 
@@ -50,7 +52,11 @@ class HabitDashboard : Fragment() {
     }
 
     private fun initViews() {
-        adapter = HabitsOverviewAdapter()
+        adapter = HabitsOverviewAdapter(object : OnHabitDeletionListener {
+            override fun onHabitDeleted(habit: Habit) {
+                dashBoardViewModel.deleteSelectedHabit(habit)
+            }
+        })
 
         binding.newHabitButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_dashBoard_to_addNewHabit)
@@ -70,5 +76,8 @@ class HabitDashboard : Fragment() {
 
     }
 
+}
 
+interface OnHabitDeletionListener {
+    fun onHabitDeleted(habit: Habit)
 }

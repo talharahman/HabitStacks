@@ -70,8 +70,3 @@ class TrackerOverviewViewModelFactory(
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
-
-interface OnEntryDeletionListener {
-
-    fun onEntryDeleted(trackerEntry: HabitTrackerEntry)
-}

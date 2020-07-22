@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.habitstacks.databinding.TrackQuestionsItemviewBinding
 import com.example.habitstacks.model.HabitTrackerEntry
+import com.example.habitstacks.view.OnEntryDeletionListener
 import com.example.habitstacks.view.TrackQuestionsOverviewDirections
-import com.example.habitstacks.viewmodel.OnEntryDeletionListener
 
-class TrackQuestionsAdapter(private val listener: OnEntryDeletionListener) : ListAdapter<HabitTrackerEntry, TrackQuestionsAdapter.ViewHolder>(TrackDiffCallback) {
+class TrackQuestionsAdapter(private val listener: OnEntryDeletionListener) :
+        ListAdapter<HabitTrackerEntry, TrackQuestionsAdapter.ViewHolder>(TrackDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -40,24 +41,35 @@ class TrackQuestionsAdapter(private val listener: OnEntryDeletionListener) : Lis
 
         fun bind(item: HabitTrackerEntry, listener: OnEntryDeletionListener) {
             binding.habitTracker = item
-            binding.trackerEditButton.setOnClickListener {
-                it.findNavController().navigate(TrackQuestionsOverviewDirections
-                        .actionTrackQuestionsOverviewToEditTrackerFragment(item))
-            }
-            binding.trackerDeleteButton.setOnClickListener {
-                binding.trackerOverviewCardview.visibility = View.GONE
-                binding.layoutTrackDeletion.cardviewTrackDeletion.visibility = View.VISIBLE
-                binding.layoutTrackDeletion.deleteNoConfirm.setOnClickListener {
-                    binding.layoutTrackDeletion.cardviewTrackDeletion.visibility = View.GONE
-                    binding.trackerOverviewCardview.visibility = View.VISIBLE
-                }
-                binding.layoutTrackDeletion.deleteYesConfirm.setOnClickListener {
-                    listener.onEntryDeleted(item)
-                    binding.layoutTrackDeletion.cardviewTrackDeletion.visibility = View.GONE
-                    binding.trackerOverviewCardview.visibility = View.VISIBLE
-                }
-            }
+            binding.trackerEditButton.setOnClickListener { it.onClick(item, listener) }
+            binding.trackerDeleteButton.setOnClickListener { it.onClick(item, listener) }
             binding.executePendingBindings()
+        }
+
+        private fun View.onClick(data: HabitTrackerEntry, sender: OnEntryDeletionListener) {
+            when (this) {
+                binding.trackerEditButton -> {
+                    this.findNavController().navigate(TrackQuestionsOverviewDirections
+                            .actionTrackQuestionsOverviewToEditTrackerFragment(data))
+                }
+                binding.trackerDeleteButton -> {
+                    val overview = binding.trackerOverviewCardview
+                    val deletion = binding.layoutTrackDeletion.cardviewTrackDeletion
+                    overview.visibility = View.GONE
+                    deletion.visibility = View.VISIBLE
+
+                    binding.layoutTrackDeletion.deleteNoConfirm.setOnClickListener {
+                        deletion.visibility = View.GONE
+                        overview.visibility = View.VISIBLE
+                    }
+
+                    binding.layoutTrackDeletion.deleteYesConfirm.setOnClickListener {
+                        sender.onEntryDeleted(data)
+                        deletion.visibility = View.GONE
+                        overview.visibility = View.VISIBLE
+                    }
+                }
+            }
         }
 
         companion object {
@@ -70,3 +82,7 @@ class TrackQuestionsAdapter(private val listener: OnEntryDeletionListener) : Lis
         }
     }
 }
+
+
+
+

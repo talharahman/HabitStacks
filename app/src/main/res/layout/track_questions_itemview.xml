@@ -139,7 +139,8 @@
 
         <include
             android:id="@+id/layout_track_deletion"
-            layout="@layout/track_deletion_input"/>
+            layout="@layout/track_deletion_input"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
