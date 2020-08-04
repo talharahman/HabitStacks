@@ -14,7 +14,7 @@ fun TextView.setHabitDescriptionText(item: Habit?) {
 @BindingAdapter("habitRatingIcon")
 fun ImageView.setRatingIcon(item: Habit?) {
     item?.let {
-        setImageResource(when (item.habitRating) {
+        setImageResource(when (item.habitDuration) {
             "POSITIVE" -> R.drawable.ic_baseline_thumb_up
             "NEUTRAL" -> R.drawable.ic_baseline_check
             "NEGATIVE" -> R.drawable.ic_baseline_thumb_down

@@ -18,7 +18,7 @@ import com.example.habitstacks.R
 import com.example.habitstacks.database.HabitDatabase
 import com.example.habitstacks.databinding.NewEditHabitBinding
 import com.example.habitstacks.model.Priority
-import com.example.habitstacks.model.Rating
+import com.example.habitstacks.model.Duration
 import com.example.habitstacks.viewmodel.NewEditHabitViewModel
 import com.example.habitstacks.viewmodel.NewHabitViewModelFactory
 
@@ -74,17 +74,17 @@ class NewHabitFragment : Fragment() {
         viewModelEdit.cardViewRatingVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
-                    binding.layoutRating.cardviewRating.visibility = View.VISIBLE
-                    binding.layoutRating.ratingRadioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
+                    binding.layoutRating.cardviewDuration.visibility = View.VISIBLE
+                    binding.layoutRating.durationRadioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
                         rg?.let {
                             when (id) {
-                                rg[0].id -> viewModelEdit.onRatingInputChanged(Rating.POSITIVE.name)
-                                rg[1].id -> viewModelEdit.onRatingInputChanged(Rating.NEUTRAL.name)
-                                rg[2].id -> viewModelEdit.onRatingInputChanged(Rating.NEGATIVE.name)
+                                rg[0].id -> viewModelEdit.onRatingInputChanged(Duration.DAILY.name)
+                                rg[1].id -> viewModelEdit.onRatingInputChanged(Duration.WEEKLY.name)
+                                rg[2].id -> viewModelEdit.onRatingInputChanged(Duration.MONTHLY.name)
                             }
                         }
                     }
-                } else binding.layoutRating.cardviewRating.visibility = View.GONE
+                } else binding.layoutRating.cardviewDuration.visibility = View.GONE
             }
         })
 

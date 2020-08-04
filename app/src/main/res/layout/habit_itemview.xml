@@ -27,37 +27,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
+                app:layout_constraintBottom_toTopOf="@id/textView"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/goal_button"
-                app:layout_constraintTop_toBottomOf="@id/habit_description">
-
-                <ImageView
-                    android:id="@+id/icon_priority_low"
-                    style="@style/IconStyle"
-                    app:lowPriority="@{habit}"
-                    tools:srcCompat="@drawable/ic_baseline_priority"/>
-
-                <ImageView
-                    android:id="@+id/icon_priority_med"
-                    style="@style/IconStyle"
-                    app:medPriority="@{habit}"
-                    tools:srcCompat="@drawable/ic_baseline_priority"/>
-
-                <ImageView
-                    android:id="@+id/icon_priority_high"
-                    style="@style/IconStyle"
-                    app:highPriority="@{habit}"
-                    tools:srcCompat="@drawable/ic_baseline_priority"/>
-
-                <ImageView
-                    android:id="@+id/icon_rating"
-                    style="@style/IconStyle"
-                    android:layout_marginStart="35dp"
-                    app:habitRatingIcon="@{habit}"
-                    tools:srcCompat="@drawable/ic_baseline_thumb_up" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/habit_description"
+                app:layout_constraintVertical_bias="0.224">
 
                 <Button
                     android:id="@+id/edit_habit_button"
@@ -73,8 +49,32 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="30dp"
-                    android:background="@drawable/ic_baseline_delete"
-                    />
+                    android:background="@drawable/ic_baseline_delete" />
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/icon_priority_high"-->
+<!--                    style="@style/IconStyle"-->
+<!--                    app:highPriority="@{habit}"-->
+<!--                    tools:srcCompat="@drawable/ic_baseline_priority" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/icon_rating"-->
+<!--                    style="@style/IconStyle"-->
+<!--                    android:layout_marginStart="35dp"-->
+<!--                    app:habitRatingIcon="@{habit}"-->
+<!--                    tools:srcCompat="@drawable/ic_baseline_thumb_up" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/icon_priority_low"-->
+<!--                    style="@style/IconStyle"-->
+<!--                    app:lowPriority="@{habit}"-->
+<!--                    tools:srcCompat="@drawable/ic_baseline_priority" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/icon_priority_med"-->
+<!--                    style="@style/IconStyle"-->
+<!--                    app:medPriority="@{habit}"-->
+<!--                    tools:srcCompat="@drawable/ic_baseline_priority" />-->
 
             </LinearLayout>
 
@@ -94,16 +94,6 @@
 
 
             <Button
-                android:id="@+id/goal_button"
-                style="@style/ButtonStyle"
-                android:layout_marginBottom="128dp"
-                android:text="@string/goal_text"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
                 android:id="@+id/track_button"
                 style="@style/ButtonStyle"
                 android:layout_marginBottom="40dp"
@@ -112,6 +102,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Day 7"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/track_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/icon_layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

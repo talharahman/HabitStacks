@@ -42,7 +42,7 @@
 
         <include
             android:id="@+id/layout_rating"
-            layout="@layout/rating_input"/>
+            layout="@layout/duration_input"/>
 
         <include
             android:id="@+id/layout_priority"

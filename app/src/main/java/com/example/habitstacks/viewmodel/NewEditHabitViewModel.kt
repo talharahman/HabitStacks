@@ -16,7 +16,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val inputDescription = MutableLiveData<String>()
-    private val inputRating = MutableLiveData<String>()
+    private val inputDuration = MutableLiveData<String>()
     private val inputPriority = MutableLiveData<String>()
     val isInputReceived = MutableLiveData<Boolean?>()
 
@@ -26,8 +26,8 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
     private val _cardViewDescriptionVisible = MutableLiveData<Boolean>()
     val cardViewDescriptionVisible: LiveData<Boolean> get() = _cardViewDescriptionVisible
 
-    private val _cardViewRatingVisible = MutableLiveData<Boolean>()
-    val cardViewRatingVisible: LiveData<Boolean> get() = _cardViewRatingVisible
+    private val _cardViewDurationVisible = MutableLiveData<Boolean>()
+    val cardViewRatingVisible: LiveData<Boolean> get() = _cardViewDurationVisible
 
     private val _cardViewPriorityVisible = MutableLiveData<Boolean>()
     val cardViewPriorityVisible: LiveData<Boolean> get() = _cardViewPriorityVisible
@@ -36,7 +36,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
     init {
         _backButtonVisible.value = false
         _cardViewDescriptionVisible.value = true
-        _cardViewRatingVisible.value = false
+        _cardViewDurationVisible.value = false
         _cardViewPriorityVisible.value = false
         newHabitCardPosition = NewEditHabitCards.DESCRIPTION
         isInputReceived.value = null
@@ -48,7 +48,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
     }
 
     fun onRatingInputChanged(input: String) {
-        inputRating.value = input
+        inputDuration.value = input
     }
 
     fun onPriorityInputChanged(input: String) {
@@ -61,14 +61,14 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
             "DESCRIPTION" -> {
                 if (inputDescription.value != null) {
                     _cardViewDescriptionVisible.value = false
-                    _cardViewRatingVisible.value = true
+                    _cardViewDurationVisible.value = true
                     _backButtonVisible.value = true
-                    newHabitCardPosition = NewEditHabitCards.RATING
+                    newHabitCardPosition = NewEditHabitCards.DURATION
                 } else isInputReceived.value = false
             }
-            "RATING" -> {
-                if (inputRating.value != null) {
-                    _cardViewRatingVisible.value = false
+            "DURATION" -> {
+                if (inputDuration.value != null) {
+                    _cardViewDurationVisible.value = false
                     _cardViewPriorityVisible.value = true
                     newHabitCardPosition = NewEditHabitCards.PRIORITY
                 } else isInputReceived.value = false
@@ -90,15 +90,15 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
             "DESCRIPTION" -> {
                 _backButtonVisible.value = false
             }
-            "RATING" -> {
-                _cardViewRatingVisible.value = false
+            "DURATION" -> {
+                _cardViewDurationVisible.value = false
                 _cardViewDescriptionVisible.value = true
                 newHabitCardPosition = NewEditHabitCards.DESCRIPTION
             }
             "PRIORITY" -> {
                 _cardViewPriorityVisible.value = false
-                _cardViewRatingVisible.value = true
-                newHabitCardPosition = NewEditHabitCards.RATING
+                _cardViewDurationVisible.value = true
+                newHabitCardPosition = NewEditHabitCards.DURATION
             }
         }
     }
@@ -108,7 +108,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
         uiScope.launch {
             val newHabit = Habit(
                     inputDescription.value!!,
-                    inputRating.value!!,
+                    inputDuration.value!!,
                     inputPriority.value!!)
             insert(newHabit)
         }
@@ -122,7 +122,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
         uiScope.launch {
             selectedHabit?.let {
                 selectedHabit.habitDescription = inputDescription.value!!
-                selectedHabit.habitRating = inputRating.value!!
+                selectedHabit.habitDuration = inputDuration.value!!
                 selectedHabit.habitPriority = inputPriority.value!!
                 update(selectedHabit)
             }
@@ -152,4 +152,4 @@ class NewHabitViewModelFactory(private val dataSource: HabitDao,
     }
 }
 
-enum class NewEditHabitCards { DESCRIPTION, RATING, PRIORITY }
+enum class NewEditHabitCards { DESCRIPTION, DURATION, PRIORITY }

@@ -12,7 +12,7 @@ data class Habit(
         var habitDescription: String,
 
         @ColumnInfo(name = "habit_rating")
-        var habitRating: String,
+        var habitDuration: String,
 
         @ColumnInfo(name = "habit_priority")
         var habitPriority: String) : Parcelable {
@@ -22,6 +22,6 @@ data class Habit(
     var habitId: Long = 0L
 }
 
-enum class Rating { POSITIVE, NEUTRAL, NEGATIVE }
+enum class Duration { DAILY, WEEKLY, MONTHLY }
 
 enum class Priority { LOW, MEDIUM, HIGH }
