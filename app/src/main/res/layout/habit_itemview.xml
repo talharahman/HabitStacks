@@ -14,113 +14,144 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/habit_overview_cardview"
-        style="@style/CardViewStyle">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/habit_overview_cardview"
+            style="@style/CardViewStyle">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:id="@+id/icon_layout"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@id/textView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/habit_description"
-                app:layout_constraintVertical_bias="0.224">
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/icon_layout_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@id/icon_layout_bottom"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/habit_description"
+                    app:layout_constraintVertical_bias="0.224">
+
+                    <ImageView
+                        android:id="@+id/icon_priority_low"
+                        style="@style/IconStyle"
+                        android:layout_marginStart="30dp"
+                        app:lowPriority="@{habit}"
+                        tools:srcCompat="@drawable/ic_baseline_priority" />
+
+                    <ImageView
+                        android:id="@+id/icon_priority_med"
+                        style="@style/IconStyle"
+                        app:medPriority="@{habit}"
+                        tools:srcCompat="@drawable/ic_baseline_priority" />
+
+                    <ImageView
+                        android:id="@+id/icon_priority_high"
+                        style="@style/IconStyle"
+                        app:highPriority="@{habit}"
+                        tools:srcCompat="@drawable/ic_baseline_priority" />
+
+                    <Button
+                        android:id="@+id/edit_habit_button"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="80dp"
+                        android:background="@drawable/ic_baseline_edit" />
+
+                    <Button
+                        android:id="@+id/delete_habit_button"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="40dp"
+                        android:background="@drawable/ic_baseline_delete" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/habit_description"
+                    style="@style/TextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textSize="32sp"
+                    app:habitDescriptionText="@{habit}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="intermittent fasting for three days a week" />
+
+
+                <LinearLayout
+                    android:id="@+id/icon_layout_bottom"
+                    android:layout_width="358dp"
+                    android:layout_height="67dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toTopOf="@id/track_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/icon_layout_top">
+
+                    <Button
+                        android:id="@+id/thumbs_up"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/ic_baseline_thumb_up" />
+
+                    <Button
+                        android:id="@+id/thumbs_down"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="16dp"
+                        android:background="@drawable/ic_baseline_thumb_down" />
+
+                    <TextView
+                        android:id="@+id/frequency_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:text="0/3 times"
+                        android:textSize="24sp"
+                        app:habitFrequencyText="@{habit}" />
+
+                    <TextView
+                        android:id="@+id/duration_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:text="daily"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        app:habitDurationText="@{habit}" />
+
+                </LinearLayout>
 
                 <Button
-                    android:id="@+id/edit_habit_button"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="60dp"
-                    android:background="@drawable/ic_baseline_edit" />
+                    android:id="@+id/track_button"
+                    style="@style/ButtonStyle"
+                    android:layout_marginBottom="40dp"
+                    android:text="@string/track_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-                <Button
-                    android:id="@+id/delete_habit_button"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="30dp"
-                    android:background="@drawable/ic_baseline_delete" />
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/icon_priority_high"-->
-<!--                    style="@style/IconStyle"-->
-<!--                    app:highPriority="@{habit}"-->
-<!--                    tools:srcCompat="@drawable/ic_baseline_priority" />-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/icon_rating"-->
-<!--                    style="@style/IconStyle"-->
-<!--                    android:layout_marginStart="35dp"-->
-<!--                    app:habitRatingIcon="@{habit}"-->
-<!--                    tools:srcCompat="@drawable/ic_baseline_thumb_up" />-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/icon_priority_low"-->
-<!--                    style="@style/IconStyle"-->
-<!--                    app:lowPriority="@{habit}"-->
-<!--                    tools:srcCompat="@drawable/ic_baseline_priority" />-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/icon_priority_med"-->
-<!--                    style="@style/IconStyle"-->
-<!--                    app:medPriority="@{habit}"-->
-<!--                    tools:srcCompat="@drawable/ic_baseline_priority" />-->
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/habit_description"
-                style="@style/TextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:textSize="32sp"
-                app:habitDescriptionText="@{habit}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="intermittent fasting for three days a week" />
-
-
-            <Button
-                android:id="@+id/track_button"
-                style="@style/ButtonStyle"
-                android:layout_marginBottom="40dp"
-                android:text="@string/track_text"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Day 7"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/track_button"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/icon_layout" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
         <include
             android:id="@+id/layout_habit_deletion"
             layout="@layout/habit_deletion_input"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </LinearLayout>
 

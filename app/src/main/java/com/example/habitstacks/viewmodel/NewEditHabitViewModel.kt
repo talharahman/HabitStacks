@@ -1,5 +1,6 @@
 package com.example.habitstacks.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,6 +20,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
     private val inputDuration = MutableLiveData<String>()
     private val inputPriority = MutableLiveData<String>()
     val isInputReceived = MutableLiveData<Boolean?>()
+    val inputFrequency = MutableLiveData<Int>()
 
     private val _backButtonVisible = MutableLiveData<Boolean>()
     val backButtonVisible: LiveData<Boolean> get() = _backButtonVisible
@@ -27,7 +29,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
     val cardViewDescriptionVisible: LiveData<Boolean> get() = _cardViewDescriptionVisible
 
     private val _cardViewDurationVisible = MutableLiveData<Boolean>()
-    val cardViewRatingVisible: LiveData<Boolean> get() = _cardViewDurationVisible
+    val cardViewDurationVisible: LiveData<Boolean> get() = _cardViewDurationVisible
 
     private val _cardViewPriorityVisible = MutableLiveData<Boolean>()
     val cardViewPriorityVisible: LiveData<Boolean> get() = _cardViewPriorityVisible
@@ -40,6 +42,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
         _cardViewPriorityVisible.value = false
         newHabitCardPosition = NewEditHabitCards.DESCRIPTION
         isInputReceived.value = null
+        inputFrequency.value = 1
     }
 
 
@@ -47,9 +50,21 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
         inputDescription.value = input
     }
 
-    fun onRatingInputChanged(input: String) {
+    fun onDurationInputChanged(input: String) {
         inputDuration.value = input
     }
+
+
+    fun countDown() {
+        if (inputFrequency.value!! < 0) {
+            inputFrequency.value = inputFrequency.value?.minus(1)
+        }
+    }
+
+    fun countUp() {
+        inputFrequency.value = inputFrequency.value?.plus(1)
+    }
+
 
     fun onPriorityInputChanged(input: String) {
         inputPriority.value = input
@@ -109,6 +124,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
             val newHabit = Habit(
                     inputDescription.value!!,
                     inputDuration.value!!,
+                    inputFrequency.value!!,
                     inputPriority.value!!)
             insert(newHabit)
         }
@@ -123,6 +139,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
             selectedHabit?.let {
                 selectedHabit.habitDescription = inputDescription.value!!
                 selectedHabit.habitDuration = inputDuration.value!!
+                selectedHabit.durationFrequency = inputFrequency.value!!
                 selectedHabit.habitPriority = inputPriority.value!!
                 update(selectedHabit)
             }

@@ -11,17 +11,16 @@ fun TextView.setHabitDescriptionText(item: Habit?) {
     item?.let { text = item.habitDescription }
 }
 
-@BindingAdapter("habitRatingIcon")
-fun ImageView.setRatingIcon(item: Habit?) {
-    item?.let {
-        setImageResource(when (item.habitDuration) {
-            "POSITIVE" -> R.drawable.ic_baseline_thumb_up
-            "NEUTRAL" -> R.drawable.ic_baseline_check
-            "NEGATIVE" -> R.drawable.ic_baseline_thumb_down
-            else -> android.R.color.transparent
-        })
-    }
+@BindingAdapter("habitFrequencyText")
+fun TextView.setHabitFrequency(item: Habit?) {
+    item?.let { text = "0 / ${item.durationFrequency} times" }
 }
+
+@BindingAdapter("habitDurationText")
+fun TextView.setHabitDurationText(item: Habit?) {
+    item?.let { text = item.habitDuration.toLowerCase() }
+}
+
 
 @BindingAdapter("lowPriority")
 fun ImageView.setLowPriorityIcon(item: Habit?) {

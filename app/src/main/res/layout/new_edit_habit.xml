@@ -41,7 +41,7 @@
             layout="@layout/description_input"/>
 
         <include
-            android:id="@+id/layout_rating"
+            android:id="@+id/layout_duration"
             layout="@layout/duration_input"/>
 
         <include

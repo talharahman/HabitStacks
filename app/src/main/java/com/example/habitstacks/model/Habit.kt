@@ -11,8 +11,11 @@ data class Habit(
         @ColumnInfo(name = "habit_description")
         var habitDescription: String,
 
-        @ColumnInfo(name = "habit_rating")
+        @ColumnInfo(name = "habit_duration")
         var habitDuration: String,
+
+        @ColumnInfo(name = "duration_frequency")
+        var durationFrequency: Int,
 
         @ColumnInfo(name = "habit_priority")
         var habitPriority: String) : Parcelable {

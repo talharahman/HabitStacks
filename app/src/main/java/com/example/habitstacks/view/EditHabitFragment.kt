@@ -73,11 +73,11 @@ class EditHabitFragment : Fragment() {
             }
         })
 
-        viewModelEdit.cardViewRatingVisible.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.cardViewDurationVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
-                    binding.layoutRating.cardviewDuration.visibility = View.VISIBLE
-                    val radioGroup = binding.layoutRating.durationRadioGroup
+                    binding.layoutDuration.cardviewDuration.visibility = View.VISIBLE
+                    val radioGroup = binding.layoutDuration.durationRadioGroup
 
                     when (selectedHabit.habitDuration) {
                         Duration.DAILY.name -> radioGroup.check(R.id.daily_button)
@@ -88,13 +88,20 @@ class EditHabitFragment : Fragment() {
                     radioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
                         rg?.let {
                             when (id) {
-                                rg[0].id -> viewModelEdit.onRatingInputChanged(Duration.DAILY.name)
-                                rg[1].id -> viewModelEdit.onRatingInputChanged(Duration.WEEKLY.name)
-                                rg[2].id -> viewModelEdit.onRatingInputChanged(Duration.MONTHLY.name)
+                                rg[0].id -> viewModelEdit.onDurationInputChanged(Duration.DAILY.name)
+                                rg[1].id -> viewModelEdit.onDurationInputChanged(Duration.WEEKLY.name)
+                                rg[2].id -> viewModelEdit.onDurationInputChanged(Duration.MONTHLY.name)
                             }
                         }
                     }
-                } else binding.layoutRating.cardviewDuration.visibility = View.GONE
+
+                    binding.layoutDuration.countDownButton.setOnClickListener {
+                        viewModelEdit.countDown()
+                    }
+                    binding.layoutDuration.countUpButton.setOnClickListener {
+                        viewModelEdit.countUp()
+                    }
+                } else binding.layoutDuration.cardviewDuration.visibility = View.GONE
             }
         })
 
