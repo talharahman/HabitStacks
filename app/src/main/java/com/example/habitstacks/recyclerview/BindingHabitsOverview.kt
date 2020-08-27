@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.habitstacks.model.Habit
 import com.example.habitstacks.R
+import java.util.*
 
 @BindingAdapter("habitDescriptionText")
 fun TextView.setHabitDescriptionText(item: Habit?) {
@@ -18,7 +19,7 @@ fun TextView.setHabitFrequency(item: Habit?) {
 
 @BindingAdapter("habitDurationText")
 fun TextView.setHabitDurationText(item: Habit?) {
-    item?.let { text = item.habitDuration.toLowerCase() }
+    item?.let { text = item.habitDuration.toLowerCase(Locale.getDefault()) }
 }
 
 

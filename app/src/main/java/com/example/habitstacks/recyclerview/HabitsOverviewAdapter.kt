@@ -1,5 +1,6 @@
 package com.example.habitstacks.recyclerview
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,7 +43,23 @@ class HabitsOverviewAdapter(private val listener: OnHabitDeletionListener) : Lis
             binding.trackButton.setOnClickListener { it.onClick(item, listener) }
             binding.editHabitButton.setOnClickListener { it.onClick(item, listener) }
             binding.deleteHabitButton.setOnClickListener { it.onClick(item, listener) }
+
+            setFrequency(item)
             binding.executePendingBindings()
+        }
+
+        private fun setFrequency(data: Habit) {
+            // TODO does not persist count data
+            var count = 0
+            binding.frequencyView.text = "$count / ${data.durationFrequency} times"
+            binding.thumbsUp.setOnClickListener {
+                if (count < data.durationFrequency) count++
+                binding.frequencyView.text = "$count / ${data.durationFrequency} times"
+            }
+            binding.thumbsDown.setOnClickListener {
+                if (count > 0) count--
+                binding.frequencyView.text = "$count / ${data.durationFrequency} times"
+            }
         }
 
         private fun View.onClick(data: Habit, sender: OnHabitDeletionListener) {

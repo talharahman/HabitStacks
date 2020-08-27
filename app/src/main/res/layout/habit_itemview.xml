@@ -118,16 +118,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
-                        android:text="0/3 times"
-                        android:textSize="24sp"
-                        app:habitFrequencyText="@{habit}" />
+                        tools:text="0/3 times"
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/duration_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
-                        android:text="daily"
+                        tools:text="daily"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="24sp"
                         app:habitDurationText="@{habit}" />

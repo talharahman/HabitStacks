@@ -56,7 +56,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
 
 
     fun countDown() {
-        if (inputFrequency.value!! < 0) {
+        if (inputFrequency.value!! > 0) {
             inputFrequency.value = inputFrequency.value?.minus(1)
         }
     }
