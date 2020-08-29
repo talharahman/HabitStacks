@@ -23,6 +23,10 @@ data class Habit(
     @IgnoredOnParcel
     @PrimaryKey(autoGenerate = true)
     var habitId: Long = 0L
+
+    @IgnoredOnParcel
+    @ColumnInfo(name = "frequency_count")
+    var frequencyCount = 0
 }
 
 enum class Duration { DAILY, WEEKLY, MONTHLY }

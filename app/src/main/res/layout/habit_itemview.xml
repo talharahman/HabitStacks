@@ -119,6 +119,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
                         tools:text="0/3 times"
+                        app:habitFrequencyText="@{habit}"
                         android:textSize="24sp" />
 
                     <TextView

@@ -28,4 +28,5 @@ data class HabitTrackerEntry(
     @IgnoredOnParcel
     @PrimaryKey(autoGenerate = true)
     var trackId: Long = 0L
+
 }

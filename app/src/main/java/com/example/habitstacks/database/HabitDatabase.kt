@@ -5,7 +5,7 @@ import androidx.room.*
 import com.example.habitstacks.model.Habit
 import com.example.habitstacks.model.HabitTrackerEntry
 
-@Database(entities = [Habit::class], version = 2, exportSchema = false)
+@Database(entities = [Habit::class], version = 3, exportSchema = false)
 abstract class HabitDatabase : RoomDatabase() {
 
     abstract val habitDao: HabitDao

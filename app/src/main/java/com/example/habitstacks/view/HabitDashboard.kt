@@ -56,6 +56,10 @@ class HabitDashboard : Fragment() {
             override fun onHabitDeleted(habit: Habit) {
                 dashBoardViewModel.deleteSelectedHabit(habit)
             }
+        }, object : ProgressUpdateListener {
+            override fun onFrequencyCountChanged(item: Habit, increment: Boolean) {
+                dashBoardViewModel.updateFrequencyCount(item, increment)
+            }
         })
 
         binding.newHabitButton.setOnClickListener { view: View ->
@@ -80,4 +84,8 @@ class HabitDashboard : Fragment() {
 
 interface OnHabitDeletionListener {
     fun onHabitDeleted(habit: Habit)
+}
+
+interface ProgressUpdateListener {
+    fun onFrequencyCountChanged(item: Habit, increment: Boolean)
 }

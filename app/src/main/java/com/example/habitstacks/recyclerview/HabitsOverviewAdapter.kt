@@ -12,8 +12,10 @@ import com.example.habitstacks.databinding.HabitItemviewBinding
 import com.example.habitstacks.model.Habit
 import com.example.habitstacks.view.HabitDashboardDirections
 import com.example.habitstacks.view.OnHabitDeletionListener
+import com.example.habitstacks.view.ProgressUpdateListener
 
-class HabitsOverviewAdapter(private val listener: OnHabitDeletionListener) : ListAdapter<Habit,
+class HabitsOverviewAdapter(private val deletionListener: OnHabitDeletionListener,
+                            private val updateListener: ProgressUpdateListener) : ListAdapter<Habit,
         HabitsOverviewAdapter.ViewHolder>(HabitDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,7 +23,7 @@ class HabitsOverviewAdapter(private val listener: OnHabitDeletionListener) : Lis
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position), listener)
+        holder.bind(getItem(position), deletionListener, updateListener)
     }
 
     companion object HabitDiffCallback : DiffUtil.ItemCallback<Habit>() {
@@ -38,39 +40,52 @@ class HabitsOverviewAdapter(private val listener: OnHabitDeletionListener) : Lis
     class ViewHolder(private val binding: HabitItemviewBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Habit, listener: OnHabitDeletionListener) {
+        fun bind(item: Habit,
+                 deletionListener: OnHabitDeletionListener,
+                 updateListener: ProgressUpdateListener) {
             binding.habit = item
-            binding.trackButton.setOnClickListener { it.onClick(item, listener) }
-            binding.editHabitButton.setOnClickListener { it.onClick(item, listener) }
-            binding.deleteHabitButton.setOnClickListener { it.onClick(item, listener) }
+            binding.trackButton.setOnClickListener{ it.onClick(item, deletionListener, updateListener) }
+            binding.editHabitButton.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
+            binding.deleteHabitButton.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
+            binding.thumbsUp.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
+            binding.thumbsDown.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
 
-            setFrequency(item)
+         //   setFrequency(item)
             binding.executePendingBindings()
         }
 
-        private fun setFrequency(data: Habit) {
-            // TODO does not persist count data
-            var count = 0
-            binding.frequencyView.text = "$count / ${data.durationFrequency} times"
-            binding.thumbsUp.setOnClickListener {
-                if (count < data.durationFrequency) count++
-                binding.frequencyView.text = "$count / ${data.durationFrequency} times"
-            }
-            binding.thumbsDown.setOnClickListener {
-                if (count > 0) count--
-                binding.frequencyView.text = "$count / ${data.durationFrequency} times"
-            }
-        }
+//        private fun setFrequency(data: Habit) {
+//            var count = 0
+//            binding.frequencyView.text = "$count / ${data.durationFrequency} times"
+//            binding.thumbsUp.setOnClickListener {
+//                if (count < data.durationFrequency) count++
+//                binding.frequencyView.text = "$count / ${data.durationFrequency} times"
+//            }
+//            binding.thumbsDown.setOnClickListener {
+//                if (count > 0) count--
+//                binding.frequencyView.text = "$count / ${data.durationFrequency} times"
+//            }
+//        }
 
-        private fun View.onClick(data: Habit, sender: OnHabitDeletionListener) {
+        private fun View.onClick(item: Habit,
+                                 deletionListener: OnHabitDeletionListener,
+                                 updateListener: ProgressUpdateListener) {
             when (this) {
                 binding.trackButton -> {
                     this.findNavController().navigate(HabitDashboardDirections
-                            .actionDashBoardToTrackQuestionsOverview(data.habitDescription))
+                            .actionDashBoardToTrackQuestionsOverview(item.habitDescription))
                 }
                 binding.editHabitButton -> {
                     this.findNavController().navigate(HabitDashboardDirections
-                            .actionDashBoardToEditHabitFragment(data))
+                            .actionDashBoardToEditHabitFragment(item))
+                }
+                binding.thumbsUp -> {
+                    updateListener.onFrequencyCountChanged(item,true)
+                    binding.frequencyView.setHabitFrequencyText(item)
+                }
+                binding.thumbsDown -> {
+                    updateListener.onFrequencyCountChanged(item, false)
+                    binding.frequencyView.setHabitFrequencyText(item)
                 }
                 binding.deleteHabitButton -> {
                     val overview = binding.habitOverviewCardview
@@ -83,7 +98,7 @@ class HabitsOverviewAdapter(private val listener: OnHabitDeletionListener) : Lis
                         overview.visibility = View.VISIBLE
                     }
                     binding.layoutHabitDeletion.habitDeleteButton.setOnClickListener {
-                        sender.onHabitDeleted(data)
+                        deletionListener.onHabitDeleted(item)
                         deletion.visibility = View.GONE
                         overview.visibility = View.VISIBLE
                     }

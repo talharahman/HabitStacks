@@ -1,6 +1,7 @@
 package com.example.habitstacks.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
 import com.example.habitstacks.database.HabitDao
@@ -50,6 +51,23 @@ class HabitDashboardViewModel(private val habitDatabase: HabitDao, application: 
             trackerDatabase.deleteLinkedEntries(habit.habitDescription)
         }
         getHabitsFromDatabase()
+    }
+
+    fun updateFrequencyCount(habit: Habit, increment: Boolean) {
+        uiScope.launch {
+            updateFrequencyFromSource(habit, increment)
+        }
+    }
+
+    private suspend fun updateFrequencyFromSource(item: Habit, increment: Boolean) {
+        withContext(Dispatchers.IO) {
+            if (increment) {
+                if (item.frequencyCount < item.durationFrequency) item.frequencyCount++
+            } else {
+                if (item.frequencyCount > 0) item.frequencyCount--
+            }
+            habitDatabase.update(item)
+        }
     }
 
     override fun onCleared() {

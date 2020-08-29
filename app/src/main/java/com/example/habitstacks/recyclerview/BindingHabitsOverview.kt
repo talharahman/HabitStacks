@@ -13,15 +13,14 @@ fun TextView.setHabitDescriptionText(item: Habit?) {
 }
 
 @BindingAdapter("habitFrequencyText")
-fun TextView.setHabitFrequency(item: Habit?) {
-    item?.let { text = "0 / ${item.durationFrequency} times" }
+fun TextView.setHabitFrequencyText(item: Habit?) {
+    item?.let { text = "${item.frequencyCount} / ${item.durationFrequency} times" }
 }
 
 @BindingAdapter("habitDurationText")
 fun TextView.setHabitDurationText(item: Habit?) {
     item?.let { text = item.habitDuration.toLowerCase(Locale.getDefault()) }
 }
-
 
 @BindingAdapter("lowPriority")
 fun ImageView.setLowPriorityIcon(item: Habit?) {
