@@ -19,7 +19,7 @@ fun TextView.setHabitFrequencyText(item: Habit?) {
 
 @BindingAdapter("habitDurationText")
 fun TextView.setHabitDurationText(item: Habit?) {
-    item?.let { text = item.habitDuration.toLowerCase(Locale.getDefault()) }
+    item?.let { text = item.habitDuration.toLowerCase() }
 }
 
 @BindingAdapter("lowPriority")

@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_dashBoard_to_editHabitFragment"
             app:destination="@id/editHabitFragment" />
+        <action
+            android:id="@+id/action_dashBoard_to_habitCalendarFragment"
+            app:destination="@id/habitCalendarFragment" />
     </fragment>
 
     <fragment
@@ -32,6 +35,7 @@
             android:id="@+id/action_newHabit_to_dashBoard"
             app:destination="@id/dashBoard" />
     </fragment>
+
 
     <fragment
         android:id="@+id/trackQuestionsOverview"
@@ -87,6 +91,16 @@
         <action
             android:id="@+id/action_editTrackerFragment_to_trackQuestionsOverview"
             app:destination="@id/trackQuestionsOverview" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/habitCalendarFragment"
+        android:name="com.example.habitstacks.view.HabitCalendarFragment"
+        android:label="HabitCalendarFragment"
+        tools:layout="@layout/habit_calendar">
+        <argument
+            android:name="selectedHabit"
+            app:argType="com.example.habitstacks.model.Habit"/>
     </fragment>
 
 </navigation>

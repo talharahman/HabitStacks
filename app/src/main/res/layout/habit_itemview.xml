@@ -98,7 +98,7 @@
 
                 <LinearLayout
                     android:id="@+id/icon_layout_bottom"
-                    android:layout_width="358dp"
+                    android:layout_width="match_parent"
                     android:layout_height="67dp"
                     android:orientation="horizontal"
                     android:gravity="center"
@@ -125,7 +125,7 @@
                         android:id="@+id/frequency_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="30dp"
+                        android:layout_marginStart="20dp"
                         tools:text="0/3 times"
                         app:habitFrequencyText="@{habit}"
                         android:textSize="24sp" />
@@ -160,6 +160,8 @@
             android:id="@+id/layout_habit_deletion"
             layout="@layout/habit_deletion_input"
             android:visibility="gone" />
+
+
 
     </LinearLayout>
 

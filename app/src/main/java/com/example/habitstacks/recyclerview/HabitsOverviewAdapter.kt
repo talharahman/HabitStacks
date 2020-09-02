@@ -46,26 +46,12 @@ class HabitsOverviewAdapter(private val deletionListener: OnHabitDeletionListene
             binding.habit = item
             binding.trackButton.setOnClickListener{ it.onClick(item, deletionListener, updateListener) }
             binding.editHabitButton.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
+            binding.calendarButton.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
             binding.deleteHabitButton.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
             binding.thumbsUp.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
             binding.thumbsDown.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
-
-         //   setFrequency(item)
             binding.executePendingBindings()
         }
-
-//        private fun setFrequency(data: Habit) {
-//            var count = 0
-//            binding.frequencyView.text = "$count / ${data.durationFrequency} times"
-//            binding.thumbsUp.setOnClickListener {
-//                if (count < data.durationFrequency) count++
-//                binding.frequencyView.text = "$count / ${data.durationFrequency} times"
-//            }
-//            binding.thumbsDown.setOnClickListener {
-//                if (count > 0) count--
-//                binding.frequencyView.text = "$count / ${data.durationFrequency} times"
-//            }
-//        }
 
         private fun View.onClick(item: Habit,
                                  deletionListener: OnHabitDeletionListener,
@@ -78,6 +64,10 @@ class HabitsOverviewAdapter(private val deletionListener: OnHabitDeletionListene
                 binding.editHabitButton -> {
                     this.findNavController().navigate(HabitDashboardDirections
                             .actionDashBoardToEditHabitFragment(item))
+                }
+                binding.calendarButton -> {
+                    this.findNavController().navigate(HabitDashboardDirections
+                            .actionDashBoardToHabitCalendarFragment(item))
                 }
                 binding.thumbsUp -> {
                     updateListener.onFrequencyCountChanged(item,true)

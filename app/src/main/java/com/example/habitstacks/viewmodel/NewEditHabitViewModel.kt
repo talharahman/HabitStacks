@@ -54,7 +54,6 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
         inputDuration.value = input
     }
 
-
     fun countDown() {
         if (inputFrequency.value!! > 0) {
             inputFrequency.value = inputFrequency.value?.minus(1)
@@ -65,11 +64,9 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
         inputFrequency.value = inputFrequency.value?.plus(1)
     }
 
-
     fun onPriorityInputChanged(input: String) {
         inputPriority.value = input
     }
-
 
     fun navigateToNextView() {
         when (newHabitCardPosition.name) {
@@ -99,7 +96,6 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
         }
     }
 
-
     fun navigateToPreviousView() {
         when (newHabitCardPosition.name) {
             "DESCRIPTION" -> {
@@ -117,7 +113,6 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
             }
         }
     }
-
 
     private fun newHabitSubmit() {
         uiScope.launch {
