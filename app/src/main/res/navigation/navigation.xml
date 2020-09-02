@@ -15,7 +15,9 @@
             app:destination="@id/newHabit" />
         <action
             android:id="@+id/action_dashBoard_to_trackQuestionsOverview"
-            app:destination="@id/trackQuestionsOverview" />
+            app:destination="@id/trackQuestionsOverview"
+            app:popUpTo="@id/dashBoard"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_dashBoard_to_editHabitFragment"
             app:destination="@id/editHabitFragment" />
@@ -77,6 +79,7 @@
     <fragment
         android:id="@+id/editTrackerFragment"
         android:name="com.example.habitstacks.view.EditTrackerFragment"
+        tools:layout="@layout/new_edit_tracker_questions"
         android:label="EditTrackerFragment" >
         <argument
             android:name="selectedTrack"

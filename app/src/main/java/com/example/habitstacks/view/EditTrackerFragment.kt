@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.habitstacks.databinding.NewEditTrackerQuestionsBinding
 import com.example.habitstacks.R
 import com.example.habitstacks.database.TrackerEntryDatabase
@@ -23,7 +24,6 @@ class EditTrackerFragment : Fragment() {
 
     private lateinit var binding: NewEditTrackerQuestionsBinding
     private lateinit var viewModelEdit: NewEditTrackerViewModel
-  //  private lateinit var associatedHabit: String
     private lateinit var selectedTrack: HabitTrackerEntry
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,12 +37,10 @@ class EditTrackerFragment : Fragment() {
         return binding.root
     }
 
-
     private fun initBackend() {
         val dataSource = TrackerEntryDatabase
                 .getInstance(requireContext())
                 .trackerEntryDao
-     //   associatedHabit = EditHabitFragmentArgs.fromBundle(requireArguments()).selectedHabit.habitDescription
         selectedTrack = EditTrackerFragmentArgs.fromBundle(requireArguments()).selectedTrack
 
         val viewModelFactory = NewEditTrackerViewModelFactory(dataSource, selectedTrack.associatedHabit, selectedTrack)
@@ -66,7 +64,7 @@ class EditTrackerFragment : Fragment() {
             it?.let {
                 if (it) {
                     binding.layoutLocation.cardviewTrackLocation.visibility = View.VISIBLE
-                    binding.layoutLocation.editTrackLocation.hint = selectedTrack.trackLocation
+                    binding.layoutLocation.editTrackLocation.setText(selectedTrack.trackLocation)
                     binding.layoutLocation.editTrackLocation.addTextChangedListener { location: Editable? ->
                         location?.let { viewModelEdit.onLocationInputChanged(location.toString()) }
                     }
@@ -78,7 +76,7 @@ class EditTrackerFragment : Fragment() {
             it?.let {
                 if (it) {
                     binding.layoutEmotion.cardviewTrackEmotion.visibility = View.VISIBLE
-                    binding.layoutEmotion.editTrackEmotion.hint = selectedTrack.trackEmotion
+                    binding.layoutEmotion.editTrackEmotion.setText(selectedTrack.trackEmotion)
                     binding.layoutEmotion.editTrackEmotion.addTextChangedListener { emotion: Editable? ->
                         emotion?.let { viewModelEdit.onEmotionInputChanged(emotion.toString()) }
                     }
@@ -90,7 +88,7 @@ class EditTrackerFragment : Fragment() {
             it?.let {
                 if (it) {
                     binding.layoutAction.cardviewTrackAction.visibility = View.VISIBLE
-                    binding.layoutAction.editTrackAction.hint = selectedTrack.trackAction
+                    binding.layoutAction.editTrackAction.setText(selectedTrack.trackAction)
                     binding.layoutAction.editTrackAction.addTextChangedListener { action: Editable? ->
                         action?.let { viewModelEdit.onActionInputChanged(action.toString()) }
                     }

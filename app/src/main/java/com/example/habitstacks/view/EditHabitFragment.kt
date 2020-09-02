@@ -94,7 +94,9 @@ class EditHabitFragment : Fragment() {
                             }
                         }
                     }
-
+                    viewModelEdit.inputFrequency.observe(viewLifecycleOwner, Observer { count ->
+                        binding.layoutDuration.counterText.text = "$count times"
+                    })
                     binding.layoutDuration.countDownButton.setOnClickListener {
                         viewModelEdit.countDown()
                     }

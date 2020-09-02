@@ -55,11 +55,19 @@
                         tools:srcCompat="@drawable/ic_baseline_priority" />
 
                     <Button
+                        android:id="@+id/calendar_button"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_baseline_date_range"
+                        android:layout_marginStart="60dp"/>
+
+                    <Button
                         android:id="@+id/edit_habit_button"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="80dp"
+                        android:layout_marginStart="20dp"
                         android:background="@drawable/ic_baseline_edit" />
 
                     <Button
@@ -67,7 +75,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="40dp"
+                        android:layout_marginStart="20dp"
                         android:background="@drawable/ic_baseline_delete" />
 
                 </LinearLayout>
