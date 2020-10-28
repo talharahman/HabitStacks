@@ -1,8 +1,6 @@
 package com.example.habitstacks.viewmodel
 
 import android.app.Application
-import android.util.Log
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
 import com.example.habitstacks.database.HabitDao
 import com.example.habitstacks.database.TrackerEntryDao
@@ -22,6 +20,9 @@ class HabitDashboardViewModel(private val habitDatabase: HabitDao, application: 
     private var _habits = MutableLiveData<List<Habit>>()
     val habits: LiveData<List<Habit>> get() = _habits
 
+    private var _habitsAvailable = MutableLiveData<Boolean>()
+    val habitsAvailable: LiveData<Boolean> get() = _habitsAvailable
+
     init {
         getHabitsFromDatabase()
     }
@@ -29,6 +30,7 @@ class HabitDashboardViewModel(private val habitDatabase: HabitDao, application: 
     private fun getHabitsFromDatabase() {
         uiScope.launch {
             _habits.value = getAllHabits()
+            _habitsAvailable.value = !_habits.value.isNullOrEmpty()
         }
     }
 
@@ -40,7 +42,8 @@ class HabitDashboardViewModel(private val habitDatabase: HabitDao, application: 
 
     fun deleteSelectedHabit(habit: Habit) {
         uiScope.launch {
-            val trackerDatabase = TrackerEntryDatabase.getInstance(getApplication()).trackerEntryDao
+            val trackerDatabase = TrackerEntryDatabase
+                    .getInstance(getApplication()).trackerEntryDao
             deleteHabitFromSources(habit, trackerDatabase)
         }
     }
