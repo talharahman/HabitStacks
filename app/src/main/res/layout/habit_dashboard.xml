@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.graphics.Color"/>
         <variable
             name="habitDashboardViewModel"
             type="com.example.habitstacks.viewmodel.HabitDashboardViewModel" />
@@ -28,7 +29,7 @@
             style="@style/TextStyle"
             android:layout_marginTop="184dp"
             android:text="@string/no_habits_display"
-            android:enabled="@{!habitDashboardViewModel.habitsAvailable}"
+            android:textColor="@{habitDashboardViewModel.habitsAvailable ? Color.TRANSPARENT : Color.BLACK}"
             app:layout_constraintBottom_toBottomOf="@+id/habits_overview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

@@ -20,6 +20,9 @@ class TrackerOverviewViewModel(dataSource: TrackerEntryDao, habitDescription: St
     private var _trackerEntries = MutableLiveData<List<HabitTrackerEntry>>()
     val trackerEntries: LiveData<List<HabitTrackerEntry>> get() = _trackerEntries
 
+    private var _trackersAvailable = MutableLiveData<Boolean>()
+    val trackersAvailable: LiveData<Boolean> get() = _trackersAvailable
+
     init {
         _selectedHabit.value = habitDescription
         getTrackerEntriesFromDatabase()
@@ -28,6 +31,8 @@ class TrackerOverviewViewModel(dataSource: TrackerEntryDao, habitDescription: St
     private fun getTrackerEntriesFromDatabase() {
         uiScope.launch {
             _trackerEntries.value = getEntriesForHabit()
+            _trackersAvailable.value = !_trackerEntries.value.isNullOrEmpty()
+
         }
     }
 

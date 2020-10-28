@@ -161,8 +161,6 @@
             layout="@layout/habit_deletion_input"
             android:visibility="gone" />
 
-
-
     </LinearLayout>
 
 </layout>
