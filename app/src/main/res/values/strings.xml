@@ -3,8 +3,8 @@
 
     <string name="habit_select_text">select habit to work on</string>
     <string name="habit_add_description">write the habit or routine you would like to change</string>
-    <string name="habit_add_duration">"how often do you want to work on this habit ?</string>
-    <string name="habit_add_priority">how important is making this a routine for you ?</string>
+    <string name="habit_add_duration">how often do you want to work on this habit ?</string>
+    <string name="habit_add_rating">is this a positive, negative or neutral habit ?</string>
 
     <string name="track_text">TRACK</string>
     <string name="back_text">BACK</string>
@@ -18,9 +18,9 @@
     <string name="daily_button_text"> daily</string>
     <string name="weekly_button_text"> weekly</string>
     <string name="monthly_button_text"> monthly</string>
-    <string name="low_priority"> low priority</string>
-    <string name="med_priority"> medium priority</string>
-    <string name="high_priority"> high priority</string>
+    <string name="low_priority"> i want more of this</string>
+    <string name="med_priority"> i want to maintain</string>
+    <string name="high_priority"> i want less of this</string>
     <string name="location_text">Location</string>
     <string name="emotion_text">Emotion</string>
     <string name="action_text">Action</string>

@@ -1,6 +1,5 @@
 package com.example.habitstacks.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,7 +17,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
 
     private val inputDescription = MutableLiveData<String>()
     private val inputDuration = MutableLiveData<String>()
-    private val inputPriority = MutableLiveData<String>()
+    private val inputRating = MutableLiveData<String>()
     val isInputReceived = MutableLiveData<Boolean?>()
     val inputFrequency = MutableLiveData<Int>()
 
@@ -31,15 +30,15 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
     private val _cardViewDurationVisible = MutableLiveData<Boolean>()
     val cardViewDurationVisible: LiveData<Boolean> get() = _cardViewDurationVisible
 
-    private val _cardViewPriorityVisible = MutableLiveData<Boolean>()
-    val cardViewPriorityVisible: LiveData<Boolean> get() = _cardViewPriorityVisible
+    private val _cardViewRatingVisible = MutableLiveData<Boolean>()
+    val cardViewRatingVisible: LiveData<Boolean> get() = _cardViewRatingVisible
 
 
     init {
         _backButtonVisible.value = false
         _cardViewDescriptionVisible.value = true
         _cardViewDurationVisible.value = false
-        _cardViewPriorityVisible.value = false
+        _cardViewRatingVisible.value = false
         newHabitCardPosition = NewEditHabitCards.DESCRIPTION
         isInputReceived.value = null
         inputFrequency.value = 1
@@ -64,8 +63,8 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
         inputFrequency.value = inputFrequency.value?.plus(1)
     }
 
-    fun onPriorityInputChanged(input: String) {
-        inputPriority.value = input
+    fun onRatingInputChanged(input: String) {
+        inputRating.value = input
     }
 
     fun navigateToNextView() {
@@ -81,12 +80,12 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
             "DURATION" -> {
                 if (inputDuration.value != null) {
                     _cardViewDurationVisible.value = false
-                    _cardViewPriorityVisible.value = true
-                    newHabitCardPosition = NewEditHabitCards.PRIORITY
+                    _cardViewRatingVisible.value = true
+                    newHabitCardPosition = NewEditHabitCards.RATING
                 } else isInputReceived.value = false
             }
-            "PRIORITY" -> {
-                if (inputPriority.value != null) {
+            "RATING" -> {
+                if (inputRating.value != null) {
                     if (selectedHabit == null) newHabitSubmit()
                     else editHabitSubmit()
 
@@ -106,8 +105,8 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
                 _cardViewDescriptionVisible.value = true
                 newHabitCardPosition = NewEditHabitCards.DESCRIPTION
             }
-            "PRIORITY" -> {
-                _cardViewPriorityVisible.value = false
+            "RATING" -> {
+                _cardViewRatingVisible.value = false
                 _cardViewDurationVisible.value = true
                 newHabitCardPosition = NewEditHabitCards.DURATION
             }
@@ -120,7 +119,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
                     inputDescription.value!!,
                     inputDuration.value!!,
                     inputFrequency.value!!,
-                    inputPriority.value!!)
+                    inputRating.value!!)
             insert(newHabit)
         }
     }
@@ -135,7 +134,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
                 selectedHabit.habitDescription = inputDescription.value!!
                 selectedHabit.habitDuration = inputDuration.value!!
                 selectedHabit.durationFrequency = inputFrequency.value!!
-                selectedHabit.habitPriority = inputPriority.value!!
+                selectedHabit.habitRating = inputRating.value!!
                 update(selectedHabit)
             }
         }
@@ -164,4 +163,4 @@ class NewHabitViewModelFactory(private val dataSource: HabitDao,
     }
 }
 
-enum class NewEditHabitCards { DESCRIPTION, DURATION, PRIORITY }
+enum class NewEditHabitCards { DESCRIPTION, DURATION, RATING }

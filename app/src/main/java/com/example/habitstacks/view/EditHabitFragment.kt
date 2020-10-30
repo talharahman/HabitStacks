@@ -18,7 +18,7 @@ import com.example.habitstacks.databinding.NewEditHabitBinding
 import com.example.habitstacks.R
 import com.example.habitstacks.database.HabitDatabase
 import com.example.habitstacks.model.Habit
-import com.example.habitstacks.model.Priority
+import com.example.habitstacks.model.Rating
 import com.example.habitstacks.model.Duration
 import com.example.habitstacks.viewmodel.NewEditHabitViewModel
 import com.example.habitstacks.viewmodel.NewHabitViewModelFactory
@@ -107,28 +107,28 @@ class EditHabitFragment : Fragment() {
             }
         })
 
-        viewModelEdit.cardViewPriorityVisible.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.cardViewRatingVisible.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
-                    binding.layoutPriority.cardviewPriority.visibility = View.VISIBLE
-                    val radioGroup = binding.layoutPriority.priorityRadioGroup
+                    binding.layoutRating.cardviewPriority.visibility = View.VISIBLE
+                    val radioGroup = binding.layoutRating.priorityRadioGroup
 
-                    when (selectedHabit.habitPriority) {
-                        Priority.LOW.name -> radioGroup.check(R.id.low_priority_button)
-                        Priority.MEDIUM.name -> radioGroup.check(R.id.med_priority_button)
-                        Priority.HIGH.name -> radioGroup.check(R.id.high_priority_button)
+                    when (selectedHabit.habitRating) {
+                        Rating.POSITIVE.name -> radioGroup.check(R.id.low_priority_button)
+                        Rating.NEUTRAL.name -> radioGroup.check(R.id.med_priority_button)
+                        Rating.NEGATIVE.name -> radioGroup.check(R.id.high_priority_button)
                     }
 
                     radioGroup.setOnCheckedChangeListener { rg: RadioGroup?, id: Int ->
                         rg?.let {
                             when (id) {
-                                rg[0].id -> viewModelEdit.onPriorityInputChanged(Priority.LOW.name)
-                                rg[1].id -> viewModelEdit.onPriorityInputChanged(Priority.MEDIUM.name)
-                                rg[2].id -> viewModelEdit.onPriorityInputChanged(Priority.HIGH.name)
+                                rg[0].id -> viewModelEdit.onRatingInputChanged(Rating.POSITIVE.name)
+                                rg[1].id -> viewModelEdit.onRatingInputChanged(Rating.NEUTRAL.name)
+                                rg[2].id -> viewModelEdit.onRatingInputChanged(Rating.NEGATIVE.name)
                             }
                         }
                     }
-                } else binding.layoutPriority.cardviewPriority.visibility = View.GONE
+                } else binding.layoutRating.cardviewPriority.visibility = View.GONE
             }
         })
 

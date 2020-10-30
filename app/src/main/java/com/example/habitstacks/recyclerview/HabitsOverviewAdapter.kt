@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -44,12 +45,14 @@ class HabitsOverviewAdapter(private val deletionListener: OnHabitDeletionListene
                  deletionListener: OnHabitDeletionListener,
                  updateListener: ProgressUpdateListener) {
             binding.habit = item
+
             binding.trackButton.setOnClickListener{ it.onClick(item, deletionListener, updateListener) }
             binding.editHabitButton.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
             binding.calendarButton.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
             binding.deleteHabitButton.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
             binding.thumbsUp.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
             binding.thumbsDown.setOnClickListener { it.onClick(item, deletionListener, updateListener) }
+
             binding.executePendingBindings()
         }
 

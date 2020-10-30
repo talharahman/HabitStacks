@@ -45,8 +45,8 @@
             layout="@layout/duration_input"/>
 
         <include
-            android:id="@+id/layout_priority"
-            layout="@layout/priority_input"/>
+            android:id="@+id/layout_rating"
+            layout="@layout/rating_input"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -17,8 +17,8 @@ data class Habit(
         @ColumnInfo(name = "duration_frequency")
         var durationFrequency: Int,
 
-        @ColumnInfo(name = "habit_priority")
-        var habitPriority: String) : Parcelable {
+        @ColumnInfo(name = "habit_rating")
+        var habitRating: String) : Parcelable {
 
     @IgnoredOnParcel
     @PrimaryKey(autoGenerate = true)
@@ -31,4 +31,4 @@ data class Habit(
 
 enum class Duration { DAILY, WEEKLY, MONTHLY }
 
-enum class Priority { LOW, MEDIUM, HIGH }
+enum class Rating { POSITIVE, NEUTRAL, NEGATIVE }

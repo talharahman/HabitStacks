@@ -12,7 +12,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_priority"
         style="@style/CardViewStyle"
-        android:enabled="@{newHabitViewModel.cardViewPriorityVisible}"
+        android:enabled="@{newHabitViewModel.cardViewRatingVisible}"
         app:layout_constraintBottom_toTopOf="@+id/habit_back_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,31 +22,32 @@
         <TextView
             android:id="@+id/habit_add_priority"
             style="@style/TextStyle"
-            android:text="@string/habit_add_priority"
+            android:text="@string/habit_add_rating"
             android:layout_marginTop="30dp"/>
 
         <RadioGroup
             android:id="@+id/priority_radio_group"
             style="@style/RadioButtonStyle"
-            android:layout_marginStart="88dp"
+            android:layout_width="250dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="170dp"
             android:layout_marginEnd="68dp"
-            android:layout_marginTop="160dp"
             android:orientation="vertical">
 
             <RadioButton
                 android:id="@+id/low_priority_button"
                 style="@style/RadioButtonStyle"
-                android:text="@string/low_priority"/>
+                android:text="@string/low_priority" />
 
             <RadioButton
                 android:id="@+id/med_priority_button"
                 style="@style/RadioButtonStyle"
-                android:text="@string/med_priority"/>
+                android:text="@string/med_priority" />
 
             <RadioButton
                 android:id="@+id/high_priority_button"
                 style="@style/RadioButtonStyle"
-                android:text="@string/high_priority"/>
+                android:text="@string/high_priority" />
 
         </RadioGroup>
 
