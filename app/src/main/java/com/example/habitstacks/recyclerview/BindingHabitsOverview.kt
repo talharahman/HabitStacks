@@ -1,10 +1,12 @@
 package com.example.habitstacks.recyclerview
 
+import android.graphics.Color
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.habitstacks.model.Habit
 import com.example.habitstacks.R
+import com.example.habitstacks.model.Rating
 
 @BindingAdapter("habitDescriptionText")
 fun TextView.setHabitDescriptionText(item: Habit?) {
@@ -15,6 +17,10 @@ fun TextView.setHabitDescriptionText(item: Habit?) {
 fun TextView.setHabitFrequencyText(item: Habit?) {
     item?.let {
         text = "${item.frequencyCount} / ${item.durationFrequency} times"
+        if (item.frequencyCount > item.durationFrequency) {
+            if (item.habitRating == Rating.POSITIVE.name) this.setTextColor(Color.GREEN)
+            if (item.habitRating == Rating.NEGATIVE.name) this.setTextColor(Color.RED)
+        } else this.setTextColor(Color.BLACK)
     }
 }
 

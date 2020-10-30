@@ -52,7 +52,8 @@ class HabitDashboard : Fragment() {
     }
 
     private fun initViews() {
-        adapter = HabitsOverviewAdapter(object : OnHabitDeletionListener {
+        adapter = HabitsOverviewAdapter(
+        object : OnHabitDeletionListener {
             override fun onHabitDeleted(habit: Habit) {
                 dashBoardViewModel.deleteSelectedHabit(habit)
             }

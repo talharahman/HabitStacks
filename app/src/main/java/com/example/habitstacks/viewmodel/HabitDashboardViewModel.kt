@@ -64,11 +64,8 @@ class HabitDashboardViewModel(private val habitDatabase: HabitDao, application: 
 
     private suspend fun updateFrequencyFromSource(item: Habit, increment: Boolean) {
         withContext(Dispatchers.IO) {
-            if (increment) {
-                if (item.frequencyCount < item.durationFrequency) item.frequencyCount++
-            } else {
-                if (item.frequencyCount > 0) item.frequencyCount--
-            }
+            if (!increment && item.frequencyCount > 0) item.frequencyCount--
+            else if (increment) item.frequencyCount++
             habitDatabase.update(item)
         }
     }

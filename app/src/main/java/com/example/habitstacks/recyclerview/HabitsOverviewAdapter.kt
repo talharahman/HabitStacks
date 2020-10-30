@@ -90,7 +90,7 @@ class HabitsOverviewAdapter(private val deletionListener: OnHabitDeletionListene
                         deletion.visibility = View.GONE
                         overview.visibility = View.VISIBLE
                     }
-                    binding.layoutHabitDeletion.habitDeleteButton.setOnClickListener {
+                    binding.layoutHabitDeletion.habitDeleteConfirm.setOnClickListener {
                         deletionListener.onHabitDeleted(item)
                         deletion.visibility = View.GONE
                         overview.visibility = View.VISIBLE
