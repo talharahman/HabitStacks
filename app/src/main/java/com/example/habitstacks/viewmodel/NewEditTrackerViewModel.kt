@@ -42,7 +42,12 @@ class NewEditTrackerViewModel(private val dataSource: TrackerEntryDao,
         _cardViewActionVisible.value = false
         trackCardPosition = TrackQuestionCards.LOCATION
         isInputReceived.value = null
+    }
 
+    fun setValuesForEdit(trackerEntry: HabitTrackerEntry) {
+        inputLocation.value = trackerEntry.trackLocation
+        inputEmotion.value = trackerEntry.trackEmotion
+        inputAction.value = trackerEntry.trackAction
     }
 
     fun onLocationInputChanged(input: String) {

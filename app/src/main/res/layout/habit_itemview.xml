@@ -14,8 +14,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/habit_overview_cardview"
+            app:borderColor="@{habit}"
             style="@style/CardViewStyle">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -149,7 +150,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <include
             android:id="@+id/layout_habit_deletion"

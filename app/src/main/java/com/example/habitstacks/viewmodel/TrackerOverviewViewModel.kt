@@ -32,7 +32,6 @@ class TrackerOverviewViewModel(dataSource: TrackerEntryDao, habitDescription: St
         uiScope.launch {
             _trackerEntries.value = getEntriesForHabit()
             _trackersAvailable.value = !_trackerEntries.value.isNullOrEmpty()
-
         }
     }
 

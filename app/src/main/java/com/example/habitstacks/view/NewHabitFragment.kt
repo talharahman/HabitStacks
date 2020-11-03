@@ -114,7 +114,7 @@ class NewHabitFragment : Fragment() {
             }
         })
 
-        viewModelEdit.isInputReceived.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.allInputReceived.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
                     requireView().findNavController().navigate(R.id.action_newHabit_to_dashBoard)

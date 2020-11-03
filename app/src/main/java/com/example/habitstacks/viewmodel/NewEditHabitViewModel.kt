@@ -18,7 +18,7 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
     private val inputDescription = MutableLiveData<String>()
     private val inputDuration = MutableLiveData<String>()
     private val inputRating = MutableLiveData<String>()
-    val isInputReceived = MutableLiveData<Boolean?>()
+    val allInputReceived = MutableLiveData<Boolean?>()
     val inputFrequency = MutableLiveData<Int>()
 
     private val _backButtonVisible = MutableLiveData<Boolean>()
@@ -33,17 +33,22 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
     private val _cardViewRatingVisible = MutableLiveData<Boolean>()
     val cardViewRatingVisible: LiveData<Boolean> get() = _cardViewRatingVisible
 
-
     init {
         _backButtonVisible.value = false
         _cardViewDescriptionVisible.value = true
         _cardViewDurationVisible.value = false
         _cardViewRatingVisible.value = false
         newHabitCardPosition = NewEditHabitCards.DESCRIPTION
-        isInputReceived.value = null
+        allInputReceived.value = null
         inputFrequency.value = 1
     }
 
+    fun setValuesForEdit(habit: Habit) {
+        inputDescription.value = habit.habitDescription
+        inputDuration.value = habit.habitDuration
+        inputFrequency.value = habit.durationFrequency
+        inputRating.value = habit.habitRating
+    }
 
     fun onDescriptionInputChanged(input: String) {
         inputDescription.value = input
@@ -75,22 +80,22 @@ class NewEditHabitViewModel(private val dataSource: HabitDao,
                     _cardViewDurationVisible.value = true
                     _backButtonVisible.value = true
                     newHabitCardPosition = NewEditHabitCards.DURATION
-                } else isInputReceived.value = false
+                } else allInputReceived.value = false
             }
             "DURATION" -> {
                 if (inputDuration.value != null) {
                     _cardViewDurationVisible.value = false
                     _cardViewRatingVisible.value = true
                     newHabitCardPosition = NewEditHabitCards.RATING
-                } else isInputReceived.value = false
+                } else allInputReceived.value = false
             }
             "RATING" -> {
                 if (inputRating.value != null) {
                     if (selectedHabit == null) newHabitSubmit()
                     else editHabitSubmit()
 
-                    isInputReceived.value = true
-                } else isInputReceived.value = false
+                    allInputReceived.value = true
+                } else allInputReceived.value = false
             }
         }
     }
@@ -163,4 +168,4 @@ class NewHabitViewModelFactory(private val dataSource: HabitDao,
     }
 }
 
-enum class NewEditHabitCards { DESCRIPTION, DURATION, RATING }
+enum class NewEditHabitCards { DESCRIPTION, RATING, DURATION }

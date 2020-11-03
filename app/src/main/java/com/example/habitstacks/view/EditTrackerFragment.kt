@@ -49,7 +49,7 @@ class EditTrackerFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.newTrackerViewModel = viewModelEdit
-
+        viewModelEdit.setValuesForEdit(selectedTrack)
     }
 
     private fun initObservers() {

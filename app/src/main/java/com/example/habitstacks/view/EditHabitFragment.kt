@@ -50,6 +50,7 @@ class EditHabitFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.newHabitViewModel = viewModelEdit
+        viewModelEdit.setValuesForEdit(selectedHabit)
     }
 
 
@@ -132,7 +133,7 @@ class EditHabitFragment : Fragment() {
             }
         })
 
-        viewModelEdit.isInputReceived.observe(viewLifecycleOwner, Observer {
+        viewModelEdit.allInputReceived.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
                     requireView().findNavController().navigate(R.id.action_editHabitFragment_to_dashBoard)
